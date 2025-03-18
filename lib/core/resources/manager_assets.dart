@@ -1,0 +1,47 @@
+const String imagesPath = 'assets/images';
+const String svgPath = 'assets/svg';
+const String jsonPath = 'assets/json';
+
+class ManagerAssets {
+  static const String logo2 = "$imagesPath/logo2.png";
+  static const String logo = "$imagesPath/logo.png";
+  static const String map = "$imagesPath/map.png";
+  static const String compose = "$imagesPath/compose.png";
+  static const String home = "$svgPath/home.svg";
+  static const String location = "$svgPath/location.svg";
+  static const String aljumaaa = "$svgPath/aljumaaa.svg";
+  static const String details = "$svgPath/details.svg";
+  static const String border = "$svgPath/border.svg";
+  static const String qoba = "$svgPath/qoba.svg";
+  static const String category = "$svgPath/category.svg";
+  static const String calender1 = "$svgPath/calender1.svg";
+  static const String calender2 = "$svgPath/calender2.svg";
+  static const String whatsUp = "$svgPath/whatsUp.svg";
+  static const String facebook = "$svgPath/facebook.svg";
+  static const String youtube = "$svgPath/youtube.svg";
+  static const String instagram = "$svgPath/instagram.svg";
+  static const String phone = "$svgPath/phone.svg";
+  static const String link = "$svgPath/link.svg";
+  static const String email = "$svgPath/email.svg";
+  static const String time = "$svgPath/time.svg";
+  static const String quran2 = "$svgPath/quran2.svg";
+  static const String qoba2 = "$svgPath/qoba2.svg";
+  static const String background = "$svgPath/background.svg";
+  static const String services = "$svgPath/services.svg";
+  static const String donate = "$svgPath/donate.svg";
+  static const String donates = "$svgPath/donates.svg";
+  static const String servicess = "$svgPath/servicess.svg";
+  static const String azkar = "$svgPath/azkar.svg";
+  static const String gallary = "$svgPath/gallary.svg";
+  static const String qibla = "$svgPath/qibla.svg";
+  static const String qibla2 = "$imagesPath/qibla.png";
+  static const String quran = "$svgPath/quran.svg";
+  static const String hadith = "$svgPath/hadith.svg";
+  static const String tasbih = "$svgPath/tasbih.svg";
+  static const String contactUs = "$svgPath/contactUs.svg";
+  static const String call = "$svgPath/call.svg";
+  static const String aboutUs = "$svgPath/about.svg";
+  static const String mosq = "$imagesPath/mosq.png";
+  static const String mosque3 = "$imagesPath/mosque3.png";
+  static const String mosque = "$imagesPath/mosque.png";
+}
