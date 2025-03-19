@@ -8,6 +8,7 @@ import 'package:masajid/features/donate/model/donate.dart';
 import 'package:masajid/features/gallery/model/gallery.dart';
 import 'package:masajid/features/hadith/model/hadith.dart';
 import 'package:http/http.dart' as http;
+import 'package:masajid/features/home/model/features.dart';
 import 'package:masajid/features/home/model/masjid_details.dart';
 import 'package:masajid/features/home/model/prayerTime.dart';
 import 'package:masajid/features/services/model/services.dart';
@@ -72,6 +73,15 @@ class ApiRequestController {
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"] as List;
       return jsonData.map((e)=>Tasbih.fromJson(e)).toList();
+    });
+  }
+
+  Future<List<Features?>> getFeatures() async {
+    return handleRequest(() async {
+      final url = Uri.parse(ApiSetting.features);
+      final response = await http.get(url).timeout(const Duration(seconds: 10));
+      var jsonData = handleResponse(response)["data"] as List;
+      return jsonData.map((e)=>Features.fromJson(e)).toList();
     });
   }
 

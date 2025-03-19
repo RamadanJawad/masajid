@@ -26,10 +26,10 @@ class SharedPrefController {
   }
 
   String? get getLat{
-    return _sharedPreferences.getString("lat")??"35.78056000";
+    return _sharedPreferences.getString("lat");
   }
   String? get getLong{
-    return _sharedPreferences.getString("long")??"-78.63890000";
+    return _sharedPreferences.getString("long");
   }
 
   Future initSharedPreferences() async {

@@ -9,7 +9,7 @@ import 'package:masajid/core/resources/manager_colors.dart';
 import 'package:masajid/core/resources/manager_fonts.dart';
 import 'package:masajid/core/resources/manager_sizes.dart';
 import 'package:masajid/core/resources/manager_styles.dart';
-import 'package:masajid/features/menu/view/screen/menu_screen.dart';
+import 'package:masajid/features/home/view/widget/menu_widget.dart';
 
 class CustomStack extends StatelessWidget {
   const CustomStack({
@@ -71,8 +71,7 @@ class CustomStack extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return const MenuScreen(
-
+                          return const MenuWidget(
                           );
                         },
                       );
@@ -113,15 +112,9 @@ class CustomStack extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "11:49 ",
+                  "${DateFormat('hh:mm').format(DateTime.now())} ",
                   style: getBoldTextStyle(
                       fontSize: ManagerFontSize.s30,
-                      color: ManagerColors.white),
-                ),
-                Text(
-                  "AM ",
-                  style: getBoldTextStyle(
-                      fontSize: ManagerFontSize.s20,
                       color: ManagerColors.white),
                 ),
                 Text(

@@ -19,16 +19,16 @@ class Routes {
   static const String main = '/main_view';
   static const String home = '/home_view';
   static const String menu = '/menu_view';
-  static const String quran = '/quran_view';
-  static const String qibla = '/qibla_view';
-  static const String services = '/services_view';
-  static const String azkar = '/azkar_view';
-  static const String tasbih = '/tasbih_view';
-  static const String gallery = '/gallery_view';
-  static const String donate = '/donate_view';
-  static const String hadith = '/hadith_view';
-  static const String aboutUs = '/aboutUs_view';
-  static const String contactUs = '/contactUs_view';
+  static const String quran = 'AlQurann';
+  static const String qibla = 'Qibla';
+  static const String services = 'Services';
+  static const String azkar = 'Azkar';
+  static const String tasbih = 'Tasbih';
+  static const String gallery = 'Gallery';
+  static const String donate = 'Donate';
+  static const String hadith = 'Hadith';
+  static const String aboutUs = 'About Us';
+  static const String contactUs = 'Contact Us';
   static const String contact = '/contact_view';
   static const String singleAnnouncements = '/singleAnnouncements_view';
 }
