@@ -15,6 +15,7 @@ class AzkarController extends GetxController{
   Future<void> readAzkar()async{
     azkar=await ApiRequestController().getAzkar();
     isLoading=true;
+    update();
   }
 
   @override

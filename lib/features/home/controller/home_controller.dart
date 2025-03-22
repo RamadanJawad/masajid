@@ -3,7 +3,6 @@ import 'package:adhan/adhan.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:masajid/core/api/api_request.dart';
-import 'package:masajid/core/storage/shared_controller.dart';
 import 'package:masajid/features/home/model/features.dart';
 import 'package:masajid/features/home/model/masjid_details.dart';
 
@@ -14,32 +13,16 @@ class HomeController extends GetxController {
   Coordinates? coordinates;
   CalculationParameters? parameter;
   List prayTimeData = [];
+  bool isLoading=false;
   List<Features?>? features;
-  late DateTime dateTime = DateTime.now();
+   DateTime dateTime = DateTime.now();
   MasjidDetails? masjidDetails;
   String? selectedNotificationPrayer;
+
   Future<void> readFeatures() async {
     features = await ApiRequestController().getFeatures();
+    isLoading=true;
     update();
-  }
-
-  Future<void> getMasjidDetails() async {
-    if (SharedPrefController().getLat == null) {
-      masjidDetails = await ApiRequestController().masjidDetails();
-      await SharedPrefController().saveLatLong(
-          lat: masjidDetails!.latitude!, long: masjidDetails!.longitude!);
-      initPryTime();
-      Timer.periodic(const Duration(minutes: 1), (timer) {
-        determineCurrentPrayer();
-      });
-      update();
-    } else {
-      initPryTime();
-      Timer.periodic(const Duration(minutes: 1), (timer) {
-        determineCurrentPrayer();
-      });
-      update();
-    }
   }
 
   initPryTime() {
@@ -116,8 +99,11 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
-    getMasjidDetails();
     readFeatures();
+    super.onInit();
+    initPryTime();
+    Timer.periodic(const Duration(minutes: 1), (timer) {
+      determineCurrentPrayer();
+    });
   }
 }

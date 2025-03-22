@@ -4,9 +4,13 @@ import 'package:get/get.dart';
 import 'package:masajid/core/storage/shared_controller.dart';
 import 'package:masajid/routes/routes.dart';
 
+import 'core/notification/notification_settings.dart';
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefController().initSharedPreferences();
+  await NotificationSetting().initLocalNotifications();
+  await NotificationSetting().initPusher();
   runApp(const MyApp());
 }
 

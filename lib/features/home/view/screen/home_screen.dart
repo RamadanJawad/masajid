@@ -131,29 +131,29 @@ class HomeScreen extends StatelessWidget {
                                           children: [
                                             Text(
                                               "Salah     ",
-                                              style: getRegularTextStyle(
-                                                  fontSize: ManagerFontSize.s18,
+                                              style: getBoldTextStyle(
+                                                  fontSize: ManagerFontSize.s16,
                                                   color: ManagerColors
                                                       .colorOneGradient),
                                             ),
                                             Text(
                                               "Begins",
-                                              style: getRegularTextStyle(
-                                                  fontSize: ManagerFontSize.s18,
+                                              style: getBoldTextStyle(
+                                                  fontSize: ManagerFontSize.s16,
                                                   color: ManagerColors
                                                       .colorOneGradient),
                                             ),
                                             Text(
                                               "Iqamah",
-                                              style: getRegularTextStyle(
-                                                  fontSize: ManagerFontSize.s18,
+                                              style: getBoldTextStyle(
+                                                  fontSize: ManagerFontSize.s16,
                                                   color: ManagerColors
                                                       .colorOneGradient),
                                             ),
                                             Text(
                                               "alert",
-                                              style: getRegularTextStyle(
-                                                  fontSize: ManagerFontSize.s18,
+                                              style:getBoldTextStyle(
+                                                  fontSize: ManagerFontSize.s16,
                                                   color: ManagerColors
                                                       .colorOneGradient),
                                             ),

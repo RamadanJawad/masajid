@@ -86,7 +86,7 @@ class CustomStack extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: ManagerHeight.h10,
+              height: ManagerHeight.h6,
             ),
             IntrinsicHeight(
               child: Row(
@@ -105,9 +105,6 @@ class CustomStack extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: ManagerHeight.h10,
             ),
             Row(
               children: [
@@ -143,7 +140,7 @@ class CustomStack extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: ManagerHeight.h10,
+              height: ManagerHeight.h6,
             ),
             Row(
               children: [
@@ -170,7 +167,7 @@ class CustomStack extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: ManagerHeight.h10,
+              height: ManagerHeight.h6,
             ),
           ],
         ),
