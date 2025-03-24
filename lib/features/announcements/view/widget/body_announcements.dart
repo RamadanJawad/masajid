@@ -19,8 +19,7 @@ class BodyAnnouncements extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration:
-        const BoxDecoration(color: ManagerColors.colorTwoGradient),
+        decoration: const BoxDecoration(color: ManagerColors.colorTwoGradient),
         child: Column(
           children: [
             const WidgetStack(
@@ -32,72 +31,71 @@ class BodyAnnouncements extends StatelessWidget {
                 builder: (controller) {
                   return Expanded(
                       child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(ManagerRadius.r50),
-                            topRight: Radius.circular(ManagerRadius.r50),
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(ManagerRadius.r50),
+                        topRight: Radius.circular(ManagerRadius.r50),
+                      ),
+                    ),
+                    child: controller.isLoading
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: ManagerHeight.h20,
+                              ),
+                              CarouselSliderWidget(controller: controller),
+                              SizedBox(
+                                height: ManagerHeight.h10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: List.generate(
+                                    controller.announcements!.length,
+                                    (index) => AnimatedContainer(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          height: 8,
+                                          width:
+                                              controller.currentIndex == index
+                                                  ? 16
+                                                  : 8, // Active dot is wider
+                                          decoration: BoxDecoration(
+                                            color: controller.currentIndex ==
+                                                    index
+                                                ? ManagerColors.colorOneGradient
+                                                : Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                        )),
+                              ),
+                              SizedBox(
+                                height: ManagerHeight.h10,
+                              ),
+                              Text(
+                                ManagerStrings.events,
+                                style: getBoldTextStyle(
+                                    fontSize: ManagerFontSize.s22,
+                                    color: ManagerColors.textColor),
+                              ),
+                              SizedBox(
+                                height: ManagerHeight.h10,
+                              ),
+                              EventsWidget(controller: controller),
+                            ],
+                          )
+                        : const Center(
+                            child: CircularProgressIndicator(
+                              color: ManagerColors.colorOneGradient,
+                            ),
                           ),
-                        ),
-                        child: controller.isLoading
-                            ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: ManagerHeight.h20,
-                            ),
-                            CarouselSliderWidget(controller: controller),
-                            SizedBox(
-                              height: ManagerHeight.h10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: List.generate(
-                                  controller.announcements!.length,
-                                      (index) => AnimatedContainer(
-                                    duration: const Duration(
-                                        milliseconds: 300),
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    height: 8,
-                                    width:
-                                    controller.currentIndex == index
-                                        ? 16
-                                        : 8, // Active dot is wider
-                                    decoration: BoxDecoration(
-                                      color: controller.currentIndex ==
-                                          index
-                                          ? ManagerColors
-                                          .colorOneGradient
-                                          : Colors.grey,
-                                      borderRadius:
-                                      BorderRadius.circular(4),
-                                    ),
-                                  )),
-                            ),
-                            SizedBox(
-                              height: ManagerHeight.h10,
-                            ),
-                            Text(
-                              "Events",
-                              style: getBoldTextStyle(
-                                  fontSize: ManagerFontSize.s22,
-                                  color: ManagerColors.textColor),
-                            ),
-                            SizedBox(
-                              height: ManagerHeight.h10,
-                            ),
-                            EventsWidget(controller: controller),
-                          ],
-                        )
-                            : const Center(
-                          child: CircularProgressIndicator(
-                            color: ManagerColors.colorOneGradient,
-                          ),
-                        ),
-                      ));
+                  ));
                 }),
           ],
         ),

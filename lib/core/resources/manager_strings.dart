@@ -9,7 +9,12 @@ class ManagerStrings {
   static const String gallery = 'Gallery';
   static const String announcements = 'Announcements';
   static const String services = 'Services';
+  static const String events = 'Events';
   static const String contactUs = 'Contact Us';
+  static const String prayingTimes='Praying Times';
+  static const String reset='Reset';
+  static const String sunRise='Sun Rise';
+  static const String fridayPrayers='Friday Prayers';
   static const String menu = 'Menu';
   static const String fullName = 'Full Name';
   static const String emailAddress = 'Email Address';

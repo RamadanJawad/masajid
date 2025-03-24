@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:masajid/features/aboutUs/view/screen/aboutUs_screen.dart';
+import 'package:masajid/features/announcements/view/screen/announcements_screen.dart';
 import 'package:masajid/features/announcements/view/screen/single_announcement.dart';
 import 'package:masajid/features/azkar/view/screen/azkar_screen.dart';
 import 'package:masajid/features/contactUs/view/screen/contact.dart';
@@ -30,6 +31,7 @@ class Routes {
   static const String aboutUs = 'About Us';
   static const String contactUs = 'Contact Us';
   static const String contact = '/contact_view';
+  static const String announcements = 'Announcements';
   static const String singleAnnouncements = '/singleAnnouncements_view';
 }
 
@@ -50,6 +52,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const ServicesScreen());
       case Routes.qibla:
         return MaterialPageRoute(builder: (_) => const QiblaScreen());
+      case Routes.announcements:
+        return MaterialPageRoute(builder: (_) => const AnnouncementsScreen());
       case Routes.tasbih:
         return MaterialPageRoute(builder: (_) => const TasbihScreen());
       case Routes.contactUs:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:masajid/core/resources/manager_assets.dart';
@@ -37,7 +38,7 @@ class WidgetStack extends StatelessWidget {
                   visible: visible ?? true,
                   child: IconButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                       Get.back();
                       },
                       icon: Icon(
                         Icons.close,

@@ -39,11 +39,19 @@ class QiblaController extends GetxController with GetSingleTickerProviderStateMi
         vsync: this, duration: const Duration(milliseconds: 700));
     animation = Tween(begin: 0.0, end: 0.0).animate(animationController!);
   }
+
   @override
   void dispose() {
-    super.dispose();
     _locationStreamController.close();
     FlutterQiblah().dispose();
+    super.dispose();
     Get.delete<QiblaController>();
+  }
+
+  @override
+  void onClose() {
+    _locationStreamController.close();
+    animationController?.dispose();
+    super.onClose();
   }
 }

@@ -24,6 +24,9 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.hadith);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"];
+      if (jsonData == null) {
+        return null; // Handle the case where the API returns null
+      }
       return Hadith.fromJson(jsonData);
     });
   }
@@ -33,6 +36,9 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.about);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"];
+      if (jsonData == null) {
+        return null; // Handle the case where the API returns null
+      }
       return About.fromJson(jsonData);
     });
   }
@@ -42,6 +48,9 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.donate);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"];
+      if (jsonData == null) {
+        return null; // Handle the case where the API returns null
+      }
       return Donate.fromJson(jsonData);
     });
   }
@@ -51,6 +60,9 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.masjidDetails);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"];
+      if (jsonData == null) {
+        return null; // Handle the case where the API returns null
+      }
       return MasjidDetails.fromJson(jsonData);
     });
   }
@@ -63,6 +75,9 @@ class ApiRequestController {
         "masjid_id":"1"
       }).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"];
+      if (jsonData == null) {
+        return null; // Handle the case where the API returns null
+      }
       return Device.fromJson(jsonData);
     });
   }

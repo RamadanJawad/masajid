@@ -9,7 +9,7 @@ import 'package:masajid/core/resources/manager_styles.dart';
 import 'package:masajid/features/home/controller/home_controller.dart';
 
 class MenuWidget extends StatelessWidget {
-  const MenuWidget({Key? key}) : super(key: key);
+  const MenuWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,13 @@ class MenuWidget extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(ManagerRadius.r20)),
       child: GetBuilder<HomeController>(
-        builder: (controller) =>controller.isLoading? Column(
+        builder: (controller) =>controller.isLoadingMenu? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Get.back();
                   },
                   icon: Icon(
                     Icons.close,
@@ -44,7 +44,6 @@ class MenuWidget extends StatelessWidget {
                   final availableFeatures = controller.features!
                       .where((feature) => feature!.pivot!.isAvailable == 1)
                       .toList();
-
                   return SizedBox(
                     width: double.infinity,
                     child: GridView.builder(

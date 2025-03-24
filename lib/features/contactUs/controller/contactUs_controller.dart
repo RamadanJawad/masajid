@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:masajid/core/api/api_request.dart';
 import 'package:masajid/core/resources/manager_assets.dart';
 import 'package:masajid/core/resources/manager_strings.dart';
+import 'package:masajid/core/storage/shared_controller.dart';
 import 'package:masajid/features/contactUs/model/reasons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -55,21 +56,23 @@ class ContactUsController extends GetxController {
   Future<void> sendToContact() async {
     try {
       bool status = await ApiRequestController().sendToContact(
-        deviceId: "255",
+        deviceId: SharedPrefController().getDeviceId!,
           name: name.text,
           email: email.text,
           phone: phone.text,
           reason: reason.text,
           message: message.text);
-      Get.snackbar(
-        "Success",
-        "The message was sent successfully.",
-        margin:const EdgeInsets.only(bottom: 5,left: 5,right: 5),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green.withOpacity(0.8),
-        colorText: Colors.white,
-        duration:const Duration(seconds: 4),
-      );
+      if(status){
+        Get.snackbar(
+          "Success",
+          "The message was sent successfully.",
+          margin:const EdgeInsets.only(bottom: 5,left: 5,right: 5),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green.withOpacity(0.8),
+          colorText: Colors.white,
+          duration:const Duration(seconds: 4),
+        );
+      }
     } catch (e) {
       print(e.toString());
     } finally {

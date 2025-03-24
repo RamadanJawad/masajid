@@ -9,7 +9,7 @@ import 'package:masajid/features/services/model/services.dart';
 
 class SingleServiceScreen extends StatelessWidget {
   final Services itemsServices;
-  const SingleServiceScreen({Key? key, required this.itemsServices}) : super(key: key);
+  const SingleServiceScreen({super.key, required this.itemsServices});
 
   @override
   Widget build(BuildContext context) {

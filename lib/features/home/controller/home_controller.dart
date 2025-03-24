@@ -3,6 +3,7 @@ import 'package:adhan/adhan.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:masajid/core/api/api_request.dart';
+import 'package:masajid/core/storage/shared_controller.dart';
 import 'package:masajid/features/home/model/features.dart';
 import 'package:masajid/features/home/model/masjid_details.dart';
 
@@ -13,22 +14,40 @@ class HomeController extends GetxController {
   Coordinates? coordinates;
   CalculationParameters? parameter;
   List prayTimeData = [];
-  bool isLoading=false;
+  bool isLoading = true;
+  bool isLoadingMenu = false;
   List<Features?>? features;
-   DateTime dateTime = DateTime.now();
+  DateTime dateTime = DateTime.now();
   MasjidDetails? masjidDetails;
   String? selectedNotificationPrayer;
 
   Future<void> readFeatures() async {
     features = await ApiRequestController().getFeatures();
-    isLoading=true;
+    isLoadingMenu = true;
     update();
   }
 
-  initPryTime() {
-    coordinates = Coordinates(
-        35.78056000,
-        78.63890000);
+  Future<void> initPryTime() async {
+    if (SharedPrefController().getLat != null &&
+        SharedPrefController().getLong != null) {
+      coordinates = Coordinates(double.parse(SharedPrefController().getLat!),
+          double.parse(SharedPrefController().getLong!));
+    } else {
+      masjidDetails = await ApiRequestController().masjidDetails();
+      if (masjidDetails != null &&
+          masjidDetails!.latitude != null &&
+          masjidDetails!.longitude != null) {
+        String lat = masjidDetails!.latitude!;
+        String lon = masjidDetails!.longitude!;
+        coordinates = Coordinates(double.parse(lat), double.parse(lon));
+        SharedPrefController().saveLatLong(lat:lat, long: lon);
+      } else {
+        isLoading = false;
+        update();
+        return;
+      }
+    }
+
     parameter = CalculationMethod.moon_sighting_committee.getParameters();
     parameter!.madhab = Madhab.shafi;
     prayerTimes = PrayerTimes.today(coordinates!, parameter!);
@@ -48,7 +67,7 @@ class HomeController extends GetxController {
             .format(prayerTimes!.dhuhr.add(const Duration(minutes: 10)))
       },
       {
-        "name": "Asr         ",
+        "name":"Asr         ",
         "time": prayerTimes!.asr,
         "salahBegin": DateFormat.jm().format(prayerTimes!.asr),
         "salahIqaamah": DateFormat.jm()
@@ -62,7 +81,7 @@ class HomeController extends GetxController {
             .format(prayerTimes!.maghrib.add(const Duration(minutes: 10)))
       },
       {
-        "name": "Isha       ",
+        "name":"Isha       ",
         "time": prayerTimes!.isha,
         "salahBegin": DateFormat.jm().format(prayerTimes!.isha),
         "salahIqaamah": DateFormat.jm()
@@ -71,36 +90,31 @@ class HomeController extends GetxController {
     ];
 
     determineCurrentPrayer();
+    isLoading = false;
     update();
   }
 
-  //To know the current prayer time
   void determineCurrentPrayer() {
     DateTime now = DateTime.now();
-    for (int i = 0; i < prayTimeData.length; i++) {
-      DateTime prayerTime = prayTimeData[i]["time"];
+    for (var prayer in prayTimeData) {
+      DateTime prayerTime = prayer["time"];
       if (now.isAfter(prayerTime)) {
-        currentPray = prayTimeData[i]["name"];
+        currentPray = prayer["name"];
       }
     }
     update();
   }
 
-  // Toggle notification for a specific prayer
   void toggleNotification(String prayerName) {
-    if (selectedNotificationPrayer == prayerName) {
-      selectedNotificationPrayer =
-          null; // Turn off notifications if already enabled
-    } else {
-      selectedNotificationPrayer = prayerName; // Set the selected prayer
-    }
+    selectedNotificationPrayer =
+        (selectedNotificationPrayer == prayerName) ? null : prayerName;
     update();
   }
 
   @override
   void onInit() {
-    readFeatures();
     super.onInit();
+    readFeatures();
     initPryTime();
     Timer.periodic(const Duration(minutes: 1), (timer) {
       determineCurrentPrayer();
