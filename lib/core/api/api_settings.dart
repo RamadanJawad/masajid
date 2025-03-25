@@ -5,7 +5,7 @@ class ApiSetting {
   static const String tasabih = '${baseUrl}api/mobile/tasabih';
   static const String features = '${baseUrl}api/mobile/masjids/$idMasjid/features';
   static const String hadith = '${baseUrl}api/mobile/hadiths/today';
-  static const String azkar = '${baseUrl}api/mobile/azkar?category_id=1';
+  static const String azkar = '${baseUrl}api/mobile/azkar';
   static const String masjids = '${baseUrl}api/mobile/masjids';
   static const String reason =
       '${baseUrl}api/mobile/masjids/$idMasjid/contact-us/reasons';

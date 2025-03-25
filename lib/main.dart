@@ -1,13 +1,15 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'dart:io' show Platform;
 import 'package:masajid/core/storage/shared_controller.dart';
 import 'package:masajid/routes/routes.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'firebase_options.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefController().initSharedPreferences();
   await initOneSignal();
@@ -21,6 +23,18 @@ Future<void> initOneSignal() async {
   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
   OneSignal.initialize("5646af0b-0653-40e4-912b-46a7350bd1c1");
   OneSignal.Notifications.requestPermission(true);
+  OneSignal.User.getExternalId().then((value) async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    IosDeviceInfo iosInfo=await deviceInfo.iosInfo;
+    if (value == null) {
+      if (Platform.isAndroid) {
+        OneSignal.login(androidInfo.id.toString());
+      } else if (Platform.isIOS) {
+        OneSignal.login(iosInfo.identifierForVendor.toString());
+      }
+    }
+  });
 }
 
 class MyApp extends StatelessWidget {

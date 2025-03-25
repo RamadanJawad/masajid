@@ -13,6 +13,7 @@ class SplashController extends GetxController {
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
     SharedPrefController().saveDeviceId(deviceId: androidInfo.id.toString());
     device=await ApiRequestController().sendDeviceId(deviceId:androidInfo.id.toString());
+    
   }
   @override
   void onInit() {
