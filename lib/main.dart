@@ -25,12 +25,12 @@ Future<void> initOneSignal() async {
   OneSignal.Notifications.requestPermission(true);
   OneSignal.User.getExternalId().then((value) async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    IosDeviceInfo iosInfo=await deviceInfo.iosInfo;
     if (value == null) {
       if (Platform.isAndroid) {
+        AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
         OneSignal.login(androidInfo.id.toString());
       } else if (Platform.isIOS) {
+        IosDeviceInfo iosInfo=await deviceInfo.iosInfo;
         OneSignal.login(iosInfo.identifierForVendor.toString());
       }
     }

@@ -72,7 +72,7 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.deviceId);
       final response = await http.post(url,body: {
         "device_id":deviceId,
-        "masjid_id":"1"
+        "masjid_id":ApiSetting.idMasjid
       }).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"];
       if (jsonData == null) {

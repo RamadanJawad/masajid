@@ -22,7 +22,7 @@ class SharedPrefController {
   }
 
   String? get getDeviceId {
-    return _sharedPreferences.getString("device_id") ?? "";
+    return _sharedPreferences.getString("device_id");
   }
 
   String? get getLat{
