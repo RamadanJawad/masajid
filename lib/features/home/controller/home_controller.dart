@@ -3,6 +3,7 @@ import 'package:adhan/adhan.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:masajid/core/api/api_request.dart';
+import 'package:masajid/core/cache/cache.dart';
 import 'package:masajid/core/storage/shared_controller.dart';
 import 'package:masajid/features/home/model/features.dart';
 import 'package:masajid/features/home/model/masjid_details.dart';
@@ -24,6 +25,13 @@ class HomeController extends GetxController {
   Future<void> readFeatures() async {
     features = await ApiRequestController().getFeatures();
     isLoadingMenu = true;
+    for (var i = 0; i < features!.length; i++) {
+      if (features![i]!.name == "Announcements") {
+        CacheData().setStatusAnnouncement(true);
+      } else {
+        CacheData().setStatusAnnouncement(false);
+      }
+    }
     update();
   }
 
@@ -40,7 +48,7 @@ class HomeController extends GetxController {
         String lat = masjidDetails!.latitude!;
         String lon = masjidDetails!.longitude!;
         coordinates = Coordinates(double.parse(lat), double.parse(lon));
-        SharedPrefController().saveLatLong(lat:lat, long: lon);
+        SharedPrefController().saveLatLong(lat: lat, long: lon);
       } else {
         isLoading = false;
         update();
@@ -53,7 +61,7 @@ class HomeController extends GetxController {
     prayerTimes = PrayerTimes.today(coordinates!, parameter!);
     prayTimeData = [
       {
-        "name": "Fajr        ",
+        "name": "Fajr         ",
         "time": prayerTimes!.fajr,
         "salahBegin": DateFormat.jm().format(prayerTimes!.fajr),
         "salahIqaamah": DateFormat.jm()
@@ -67,7 +75,7 @@ class HomeController extends GetxController {
             .format(prayerTimes!.dhuhr.add(const Duration(minutes: 10)))
       },
       {
-        "name":"Asr         ",
+        "name": "Asr           ",
         "time": prayerTimes!.asr,
         "salahBegin": DateFormat.jm().format(prayerTimes!.asr),
         "salahIqaamah": DateFormat.jm()
@@ -81,11 +89,17 @@ class HomeController extends GetxController {
             .format(prayerTimes!.maghrib.add(const Duration(minutes: 10)))
       },
       {
-        "name":"Isha       ",
+        "name": "Isha          ",
         "time": prayerTimes!.isha,
         "salahBegin": DateFormat.jm().format(prayerTimes!.isha),
         "salahIqaamah": DateFormat.jm()
             .format(prayerTimes!.isha.add(const Duration(minutes: 10)))
+      },
+      {
+        "name": "Friday Prayers                                 ",
+        "time": prayerTimes!.dhuhr,
+        "salahBegin": DateFormat.jm().format(prayerTimes!.dhuhr),
+        "salahIqaamah": ""
       },
     ];
 

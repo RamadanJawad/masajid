@@ -62,15 +62,15 @@ class CustomPrayTime extends StatelessWidget {
                 fontSize: ManagerFontSize.s16,
                 color: isCurrent ? ManagerColors.white : Colors.black),
           ),
-          const Spacer(),
-          IconButton(
-            icon: Icon(
-              isNotificationEnabled ? Icons.notifications_active : Icons.notifications_off,
-              color: isNotificationEnabled ? ManagerColors.yellowColor : Colors.grey,
-            ),
-            onPressed: onToggleNotification,
-          ),
-          SizedBox(width: ManagerWidth.w4),
+          // const Spacer(),
+          // IconButton(
+          //   icon: Icon(
+          //     isNotificationEnabled ? Icons.notifications_active : Icons.notifications_off,
+          //     color: isNotificationEnabled ? ManagerColors.yellowColor : Colors.grey,
+          //   ),
+          //   onPressed: onToggleNotification,
+          // ),
+          SizedBox(width: ManagerWidth.w10),
         ],
       ),
     );

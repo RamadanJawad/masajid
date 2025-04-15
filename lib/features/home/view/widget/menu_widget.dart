@@ -13,6 +13,7 @@ class MenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Dialog(
       backgroundColor: ManagerColors.white,
       shape: RoundedRectangleBorder(

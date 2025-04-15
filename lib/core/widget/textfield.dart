@@ -7,6 +7,7 @@ import 'package:masajid/core/resources/manager_styles.dart';
 Widget textField({
   bool? obSecure,
   required TextEditingController controller,
+  required String hintText,
   validator,
   Widget? suffixIcon,
   Widget? prefixIcon,
@@ -28,6 +29,9 @@ Widget textField({
     onChanged: onChange ?? (val) {},
     textInputAction: TextInputAction.next,
     decoration: InputDecoration(
+      hintText: hintText,
+      hintStyle: getRegularTextStyle(
+          fontSize: ManagerFontSize.s13, color: ManagerColors.grey),
       contentPadding: EdgeInsets.symmetric(
         vertical: ManagerHeight.h14,
         horizontal: ManagerWidth.w10,

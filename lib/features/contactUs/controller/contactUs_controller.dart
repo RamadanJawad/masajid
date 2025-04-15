@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:masajid/core/api/api_request.dart';
 import 'package:masajid/core/resources/manager_assets.dart';
 import 'package:masajid/core/resources/manager_strings.dart';
@@ -12,11 +13,17 @@ class ContactUsController extends GetxController {
   late TextEditingController email;
   late TextEditingController reason;
   late TextEditingController name;
+  String number = '';
   late TextEditingController message;
   var formKey = GlobalKey<FormState>();
   List<Reasons?>? reasons;
   bool isLoading = false;
   List<String> item = ["Loading..."];
+
+  onChange(PhoneNumber phoneNumber) {
+    number = "${phoneNumber.countryCode}${phoneNumber.number}";
+    update();
+  }
 
   List contactUs = [
     {"url": "www.burlingtonmasjid.com", "icon": ManagerAssets.link},
@@ -59,7 +66,7 @@ class ContactUsController extends GetxController {
         deviceId: SharedPrefController().getDeviceId!,
           name: name.text,
           email: email.text,
-          phone: phone.text,
+          phone: number,
           reason: reason.text,
           message: message.text);
       if(status){

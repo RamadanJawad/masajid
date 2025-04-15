@@ -6,8 +6,11 @@ class GalleryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BodyGallery(),
+    return const Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        body: BodyGallery(),
+      ),
     );
   }
 }

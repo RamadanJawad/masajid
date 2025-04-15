@@ -6,8 +6,11 @@ class AzkarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BodyAzkar(),
+    return const Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        body: BodyAzkar(),
+      ),
     );
   }
 }

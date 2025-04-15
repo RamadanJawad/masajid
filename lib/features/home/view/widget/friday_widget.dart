@@ -15,51 +15,40 @@ class FridayWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ManagerHeight.h70,
-      padding: EdgeInsets.all(ManagerWidth.w10),
+      height: ManagerHeight.h60,
       decoration: BoxDecoration(
-        borderRadius:
-        BorderRadius.circular(ManagerRadius.r10),
-        border: Border.all(
-          color: ManagerColors.grey.withOpacity(0.3),
-        ),
-      ),
-      child: Container(
-        height: ManagerHeight.h60,
-        decoration: BoxDecoration(
-            color: ManagerColors.iconColor,
-            borderRadius: BorderRadius.circular(
-                ManagerRadius.r10),
-            border: Border.all(
-                color: ManagerColors.grey
-                    .withOpacity(0.3))),
-        child: Row(
-          children: [
-            SizedBox(
-              width: ManagerWidth.w4,
-            ),
-            SvgPicture.asset(ManagerAssets.aljumaaa),
-            SizedBox(
-              width: ManagerWidth.w4,
-            ),
-            Text(
-              ManagerStrings.fridayPrayers,
-              style: getBoldTextStyle(
-                  fontSize: ManagerFontSize.s16,
-                  color: Colors.black),
-            ),
-            const Spacer(),
-            Text(
-              fridayPrayersTime,
-              style: getBoldTextStyle(
-                  fontSize: ManagerFontSize.s16,
-                  color: Colors.black),
-            ),
-            SizedBox(
-              width: ManagerWidth.w4,
-            ),
-          ],
-        ),
+          color: ManagerColors.iconColor,
+          borderRadius: BorderRadius.circular(
+              ManagerRadius.r10),
+          border: Border.all(
+              color: ManagerColors.grey
+                  .withOpacity(0.3))),
+      child: Row(
+        children: [
+          SizedBox(
+            width: ManagerWidth.w4,
+          ),
+          SvgPicture.asset(ManagerAssets.aljumaaa),
+          SizedBox(
+            width: ManagerWidth.w4,
+          ),
+          Text(
+            ManagerStrings.fridayPrayers,
+            style: getBoldTextStyle(
+                fontSize: ManagerFontSize.s16,
+                color: Colors.black),
+          ),
+          const Spacer(),
+          Text(
+            fridayPrayersTime,
+            style: getBoldTextStyle(
+                fontSize: ManagerFontSize.s16,
+                color: Colors.black),
+          ),
+          SizedBox(
+            width: ManagerWidth.w4,
+          ),
+        ],
       ),
     );
   }

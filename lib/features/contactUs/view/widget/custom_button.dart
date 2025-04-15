@@ -28,7 +28,7 @@ class CustomButton extends StatelessWidget {
         label: Text(
           title,
           style: getBoldTextStyle(
-              fontSize: ManagerFontSize.s18, color: ManagerColors.textColor),
+              fontSize: ManagerFontSize.s15, color: ManagerColors.textColor),
         ),
         icon: SvgPicture.asset(iconPath),
       ),

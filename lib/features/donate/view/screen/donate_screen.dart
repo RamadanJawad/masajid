@@ -6,8 +6,11 @@ class DonateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BodyDonate(),
+    return const Directionality(
+      textDirection: TextDirection.ltr,
+      child:  Scaffold(
+        body: BodyDonate(),
+      ),
     );
   }
 }

@@ -11,7 +11,6 @@ class QiblaController extends GetxController with GetSingleTickerProviderStateMi
   AnimationController? animationController;
   double begin = 0.0;
   List<Placemark>? placemarks;
-
   final _locationStreamController =
   StreamController<LocationStatus>.broadcast();
   get stream => _locationStreamController.stream;
@@ -27,6 +26,7 @@ class QiblaController extends GetxController with GetSingleTickerProviderStateMi
       await FlutterQiblah.requestPermissions();
       final s = await FlutterQiblah.checkLocationStatus();
       _locationStreamController.sink.add(s);
+      update();
     } else {
       _locationStreamController.sink.add(locationStatus);
     }
@@ -34,7 +34,7 @@ class QiblaController extends GetxController with GetSingleTickerProviderStateMi
   @override
   void onInit() {
     super.onInit();
-    checkLocationStatus();
+    // checkLocationStatus();
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 700));
     animation = Tween(begin: 0.0, end: 0.0).animate(animationController!);
@@ -42,10 +42,9 @@ class QiblaController extends GetxController with GetSingleTickerProviderStateMi
 
   @override
   void dispose() {
-    _locationStreamController.close();
-    FlutterQiblah().dispose();
     super.dispose();
-    Get.delete<QiblaController>();
+    _locationStreamController.close();
+    animationController?.dispose();
   }
 
   @override

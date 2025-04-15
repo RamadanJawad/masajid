@@ -6,8 +6,11 @@ class AnnouncementsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BodyAnnouncements(),
+    return const Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        body: BodyAnnouncements(),
+      ),
     );
   }
 }

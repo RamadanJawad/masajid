@@ -16,7 +16,7 @@ class SplashController extends GetxController {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       device=await ApiRequestController().sendDeviceId(deviceId:androidInfo.id.toString());
       if(device != null) {
-        SharedPrefController().saveDeviceId(deviceId: device!.deviceId.toString());
+        SharedPrefController().saveDeviceId(deviceId: androidInfo.id.toString());
       }
     } else if (Platform.isIOS) {
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;

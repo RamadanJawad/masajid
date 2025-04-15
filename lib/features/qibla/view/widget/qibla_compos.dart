@@ -1,15 +1,7 @@
-import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:masajid/core/resources/manager_assets.dart';
-import 'package:masajid/core/resources/manager_colors.dart';
-import 'package:masajid/core/resources/manager_fonts.dart';
-import 'package:masajid/core/resources/manager_sizes.dart';
-import 'package:masajid/core/resources/manager_styles.dart';
 import 'package:masajid/features/qibla/controller/qibla_controller.dart';
 import 'package:masajid/features/qibla/view/widget/location_error_widget.dart';
 import 'package:masajid/features/qibla/view/widget/qibla_compose_widget.dart';

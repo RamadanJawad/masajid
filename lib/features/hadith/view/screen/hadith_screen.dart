@@ -6,8 +6,11 @@ class HadithScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BodyHadith(),
+    return const Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        body: BodyHadith(),
+      ),
     );
   }
 }

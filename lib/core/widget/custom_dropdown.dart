@@ -5,22 +5,26 @@ import 'package:masajid/core/resources/manager_sizes.dart';
 import 'package:masajid/core/resources/manager_styles.dart';
 
 class CustomDropdownWidget extends StatelessWidget {
-  const CustomDropdownWidget({super.key, this.items, required this.controller});
+  const CustomDropdownWidget(
+      {super.key,
+      this.items,
+      required this.controller,
+      required this.hintText});
 
   final List<String>? items;
+  final String hintText;
   final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return CustomDropdown(
       fillColor: Colors.white,
-      borderSide:const BorderSide(color: Colors.grey),
-      hintText: "",
+      borderSide: const BorderSide(color: Colors.grey),
+      hintText: hintText,
       listItemStyle: getRegularTextStyle(
           fontSize: ManagerFontSize.s16, color: Colors.black),
       selectedStyle: getRegularTextStyle(
-          fontSize: ManagerFontSize.s16,
-          color: Colors.lightGreen),
+          fontSize: ManagerFontSize.s16, color: Colors.black),
       items: items,
       hintStyle: getRegularTextStyle(
           fontSize: ManagerFontSize.s16, color: Colors.grey),

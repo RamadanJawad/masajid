@@ -1,6 +1,6 @@
 class ApiSetting {
   ApiSetting._();
-  static const String baseUrl = 'http://147.182.210.42/';
+  static const String baseUrl = 'https://masjid.hopetechapps.com/';
   static const String idMasjid = '1';
   static const String tasabih = '${baseUrl}api/mobile/tasabih';
   static const String features = '${baseUrl}api/mobile/masjids/$idMasjid/features';

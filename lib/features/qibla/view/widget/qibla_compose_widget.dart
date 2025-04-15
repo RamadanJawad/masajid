@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -51,17 +50,20 @@ class QiblahCompassWidget extends StatelessWidget {
                   return Stack(
                     alignment: Alignment.center,
                     children: <Widget>[
-                      Image.asset(
-                        ManagerAssets.compose,
-                        fit: BoxFit.fill,
-                        height: ManagerHeight.h375,
+                      Container(
+                        margin: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(8),
+                        child: Image.asset(
+                          ManagerAssets.compose,
+                        ),
                       ),
                       Transform.rotate(
                         angle: controller.animation!.value,
                         child: Center(
                           child: Image.asset(
                             ManagerAssets.qibla2,
-                            width: ManagerWidth.w170,
+                            width: ManagerWidth.w150,
+                            height: ManagerHeight.h180,
                             fit: BoxFit.cover, //needle
                           ),
                         ),
@@ -71,7 +73,7 @@ class QiblahCompassWidget extends StatelessWidget {
                 },
               ),
               SizedBox(
-                height: ManagerHeight.h30,
+                height: ManagerHeight.h20,
               ),
               SvgPicture.asset(
                 ManagerAssets.location,

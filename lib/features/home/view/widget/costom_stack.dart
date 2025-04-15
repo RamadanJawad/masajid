@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:masajid/core/resources/manager_assets.dart';
@@ -13,8 +12,10 @@ import 'package:masajid/features/home/view/widget/menu_widget.dart';
 
 class CustomStack extends StatelessWidget {
   const CustomStack({
-    Key? key,
-  }) : super(key: key);
+    super.key, required this.currentPray,
+  });
+
+  final String currentPray;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +27,11 @@ class CustomStack extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: ManagerWidth.w10, vertical: ManagerHeight.h10),
+        padding: EdgeInsets.only(
+            left: ManagerWidth.w10,
+            right: ManagerWidth.w10,
+            top: ManagerHeight.h36,
+            bottom: ManagerHeight.h20),
         child: Column(
           children: [
             SizedBox(
@@ -39,13 +43,13 @@ class CustomStack extends StatelessWidget {
                   Text(
                     "Suhur : ",
                     style: getRegularTextStyle(
-                        fontSize: ManagerFontSize.s14,
+                        fontSize: ManagerFontSize.s13,
                         color: ManagerColors.white),
                   ),
                   Text(
                     "4:14 AM",
                     style: getRegularTextStyle(
-                        fontSize: ManagerFontSize.s14,
+                        fontSize: ManagerFontSize.s13,
                         color: ManagerColors.white),
                   ),
                   VerticalDivider(
@@ -56,13 +60,13 @@ class CustomStack extends StatelessWidget {
                   Text(
                     "Iftar : ",
                     style: getRegularTextStyle(
-                        fontSize: ManagerFontSize.s14,
+                        fontSize: ManagerFontSize.s13,
                         color: ManagerColors.white),
                   ),
                   Text(
                     "4:14 PM",
                     style: getRegularTextStyle(
-                        fontSize: ManagerFontSize.s14,
+                        fontSize: ManagerFontSize.s13,
                         color: ManagerColors.white),
                   ),
                   const Spacer(),
@@ -71,8 +75,7 @@ class CustomStack extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return const MenuWidget(
-                          );
+                          return const MenuWidget();
                         },
                       );
                     },
@@ -94,13 +97,13 @@ class CustomStack extends StatelessWidget {
                   Text(
                     "Now : ",
                     style: getBoldTextStyle(
-                        fontSize: ManagerFontSize.s30,
+                        fontSize: ManagerFontSize.s26,
                         color: ManagerColors.white),
                   ),
                   Text(
-                    "Duhur",
+                    currentPray,
                     style: getBoldTextStyle(
-                        fontSize: ManagerFontSize.s30,
+                        fontSize: ManagerFontSize.s26,
                         color: ManagerColors.white),
                   ),
                 ],
@@ -111,21 +114,22 @@ class CustomStack extends StatelessWidget {
                 Text(
                   "${DateFormat('hh:mm').format(DateTime.now())} ",
                   style: getBoldTextStyle(
-                      fontSize: ManagerFontSize.s30,
+                      fontSize: ManagerFontSize.s26,
                       color: ManagerColors.white),
                 ),
                 Text(
                   "(Start time)",
                   style: getRegularTextStyle(
-                      fontSize: ManagerFontSize.s14,
+                      fontSize: ManagerFontSize.s12,
                       color: ManagerColors.white),
                 ),
                 const Spacer(),
                 Text(
-                  "${DateFormat('dd').format(DateTime.now())} ${DateFormat('MMM').format(DateTime.now())}, ${DateFormat('yyyy').format(DateTime.now())}",
+                  DateFormat('d MMMM, y').format(DateTime.now()),
                   style: getRegularTextStyle(
-                      fontSize: ManagerFontSize.s14,
-                      color: ManagerColors.white),
+                    fontSize: ManagerFontSize.s13,
+                    color: ManagerColors.white,
+                  ),
                 ),
                 SizedBox(
                   width: ManagerWidth.w4,
@@ -147,14 +151,14 @@ class CustomStack extends StatelessWidget {
                 Text(
                   "1 hour 50 min left",
                   style: getRegularTextStyle(
-                      fontSize: ManagerFontSize.s14,
+                      fontSize: ManagerFontSize.s13,
                       color: ManagerColors.white),
                 ),
                 const Spacer(),
                 Text(
-                  "${HijriCalendar.now().longMonthName} | ${HijriCalendar.now().hDay} , ${HijriCalendar.now().hYear} ",
+                  "${HijriCalendar.now().longMonthName} | ${HijriCalendar.now().hDay}, ${HijriCalendar.now().hYear} AH ",
                   style: getRegularTextStyle(
-                      fontSize: ManagerFontSize.s14,
+                      fontSize: ManagerFontSize.s13,
                       color: ManagerColors.white),
                 ),
                 SvgPicture.asset(
@@ -165,9 +169,6 @@ class CustomStack extends StatelessWidget {
                   width: ManagerWidth.w4,
                 ),
               ],
-            ),
-            SizedBox(
-              height: ManagerHeight.h6,
             ),
           ],
         ),

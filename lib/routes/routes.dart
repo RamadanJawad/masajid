@@ -20,10 +20,10 @@ class Routes {
   static const String main = '/main_view';
   static const String home = '/home_view';
   static const String menu = '/menu_view';
-  static const String quran = 'AlQurann';
+  static const String quran = 'Qur’an';
   static const String qibla = 'Qibla';
   static const String services = 'Services';
-  static const String azkar = 'Azkar';
+  static const String azkar = 'Adhkar';
   static const String tasbih = 'Tasbih';
   static const String gallery = 'Gallery';
   static const String donate = 'Donate';

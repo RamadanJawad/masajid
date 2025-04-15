@@ -21,101 +21,72 @@ class CarouselSliderWidget extends StatelessWidget {
       height: ManagerHeight.h200,
       padding: const EdgeInsets.all(10),
       child: CarouselSlider.builder(
-          itemCount: controller
-              .announcements!.length,
-          itemBuilder: (BuildContext context,
-              int itemIndex,
-              int pageViewIndex) =>
+          itemCount: controller.announcements!.length,
+          itemBuilder: (BuildContext context, int itemIndex,
+                  int pageViewIndex) =>
               Container(
                   width: ManagerWidth.w300,
                   height: ManagerHeight.h140,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(
-                              controller
-                                  .announcements![
-                              itemIndex]!
-                                  .image!
-                                  .originalUrl!),
+                          image: NetworkImage(controller
+                              .announcements![itemIndex]!.image!.originalUrl!),
                           fit: BoxFit.fill),
-                      borderRadius:
-                      BorderRadius.circular(
-                          ManagerRadius.r10)),
+                      borderRadius: BorderRadius.circular(ManagerRadius.r10)),
                   child: Padding(
-                    padding:
-                    const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Column(
-                      crossAxisAlignment:
-                      CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          controller
-                              .announcements![
-                          itemIndex]!
-                              .startDate!,
+                          controller.announcements![itemIndex]!.startDate!,
                           style: getRegularTextStyle(
-                              fontSize:
-                              ManagerFontSize
-                                  .s10,
-                              color: ManagerColors
-                                  .white),
+                              fontSize: ManagerFontSize.s10,
+                              color: ManagerColors.white),
+                        ),
+                        SizedBox(
+                          height: ManagerHeight.h14,
                         ),
                         Text(
-                          controller
-                              .announcements![
-                          itemIndex]!
-                              .details!,
+                          controller.announcements![itemIndex]!.details!,
                           style: getBoldTextStyle(
-                            overflow: TextOverflow.ellipsis,
-                              fontSize:
-                              ManagerFontSize
-                                  .s14,
-                              color: ManagerColors
-                                  .white),
+                              overflow: TextOverflow.ellipsis,
+                              fontSize: ManagerFontSize.s14,
+                              color: ManagerColors.white),
                         ),
                         const Spacer(),
                         ElevatedButton(
                           onPressed: () {
-                            var cacheItem = CacheItem.announcements(
-                                imagePath: controller
-                                    .announcements![
-                                itemIndex]!
-                                    .image!
-                                    .originalUrl!,
-                                details: controller
-                                    .announcements![
-                                itemIndex]!
-                                    .details,
-                                title: controller
-                                    .announcements![
-                                itemIndex]!
-                                    .title,
-                                dateTime: controller
-                                    .announcements![
-                                itemIndex]!
-                                    .createdAt);
-                            Get.to(() =>
-                                SingleAnnouncementsScreen(
-                                  cacheItem:
-                                  cacheItem,
-                                ));
+                            if (controller.announcements!.isNotEmpty) {
+                              var cacheItem = CacheItem.announcements(
+                                  imagePath: controller
+                                      .announcements![itemIndex]!
+                                      .image!
+                                      .originalUrl!,
+                                  details: controller
+                                      .announcements![itemIndex]!.details,
+                                  title: controller
+                                      .announcements![itemIndex]!.title,
+                                  dateTime: controller
+                                      .announcements![itemIndex]!.createdAt);
+                              Get.to(() => SingleAnnouncementsScreen(
+                                    cacheItem: cacheItem,
+                                  ));
+                            }
                           },
-                          style: ElevatedButton
-                              .styleFrom(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ManagerRadius.r10)),
-                              backgroundColor:
-                              ManagerColors
-                                  .white),
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(ManagerRadius.r10)),
+                              backgroundColor: ManagerColors.white),
                           child: Text(
                             "Details",
                             style: getBoldTextStyle(
-                                fontSize:
-                                ManagerFontSize
-                                    .s14,
-                                color: ManagerColors
-                                    .textColor),
+                                fontSize: ManagerFontSize.s14,
+                                color: ManagerColors.textColor),
                           ),
-                        )
+                        ),
+                        SizedBox(height: ManagerHeight.h8,),
                       ],
                     ),
                   )),
@@ -125,10 +96,8 @@ class CarouselSliderWidget extends StatelessWidget {
             enableInfiniteScroll: false,
             reverse: false,
             autoPlay: false,
-            autoPlayInterval:
-            const Duration(seconds: 3),
-            autoPlayAnimationDuration:
-            const Duration(milliseconds: 800),
+            autoPlayInterval: const Duration(seconds: 3),
+            autoPlayAnimationDuration: const Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,
             enlargeCenterPage: true,
             enlargeFactor: 0.3,

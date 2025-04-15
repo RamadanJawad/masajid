@@ -9,9 +9,10 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(SplashController());
-    return const Scaffold(
-      body: SafeArea(
-        child: BodySplash(),
+    return const Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        body: BodySplash(),
       ),
     );
   }

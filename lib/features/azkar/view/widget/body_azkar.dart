@@ -21,7 +21,7 @@ class BodyAzkar extends StatelessWidget {
         decoration: const BoxDecoration(color: ManagerColors.colorTwoGradient),
         child: Column(
           children: [
-            const WidgetStack(
+            WidgetStack(
               name: ManagerStrings.azkar,
             ),
             GetBuilder<AzkarController>(

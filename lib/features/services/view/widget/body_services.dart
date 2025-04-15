@@ -7,6 +7,8 @@ import 'package:masajid/core/resources/manager_fonts.dart';
 import 'package:masajid/core/resources/manager_sizes.dart';
 import 'package:masajid/core/resources/manager_strings.dart';
 import 'package:masajid/core/resources/manager_styles.dart';
+import 'package:masajid/core/widget/circular_progress_widget.dart';
+import 'package:masajid/core/widget/empty_data_widget.dart';
 import 'package:masajid/core/widget/widget_stack.dart';
 import 'package:masajid/features/services/controller/services_controller.dart';
 import 'package:masajid/features/services/view/screen/single_service_screen.dart';
@@ -23,58 +25,61 @@ class BodyServices extends StatelessWidget {
         decoration: const BoxDecoration(color: ManagerColors.colorTwoGradient),
         child: Column(
           children: [
-            const WidgetStack(
+            WidgetStack(
               name: ManagerStrings.services,
             ),
-            Expanded(
-                child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(ManagerRadius.r50),
-                  topRight: Radius.circular(ManagerRadius.r50),
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: ManagerWidth.w10),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: ManagerHeight.h10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Burlington",
-                            style: getBoldTextStyle(
-                                fontSize: ManagerFontSize.s20,
-                                color: ManagerColors.colorOneGradient)),
-                        SvgPicture.asset(ManagerAssets.qoba),
-                        Text("Mosque",
-                            style: getBoldTextStyle(
-                                fontSize: ManagerFontSize.s20,
-                                color: ManagerColors.black)),
-                      ],
-                    ),
-                    SizedBox(
-                      height: ManagerHeight.h10,
-                    ),
-                    Text("Explore our services",
-                        style: getBoldTextStyle(
-                            fontSize: ManagerFontSize.s24,
-                            color: ManagerColors.black)),
-                    SizedBox(
-                      height: ManagerHeight.h10,
-                    ),
-                    Expanded(
-                        child: GetBuilder<ServicesController>(
-                            init: ServicesController(),
-                            builder: (controller) {
-                              return SizedBox(
-                                  child: controller.isLoading
-                                      ? ListView.builder(
+            GetBuilder<ServicesController>(
+                init: ServicesController(),
+                builder: (controller) {
+                  if (controller.isLoading) {
+                    if (controller.services!.isNotEmpty) {
+                      return Expanded(
+                          child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(ManagerRadius.r50),
+                            topRight: Radius.circular(ManagerRadius.r50),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: ManagerWidth.w10),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: ManagerHeight.h10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(ManagerStrings.burlington,
+                                      style: getBoldTextStyle(
+                                          fontSize: ManagerFontSize.s20,
+                                          color:
+                                              ManagerColors.colorOneGradient)),
+                                  SvgPicture.asset(ManagerAssets.qoba),
+                                  Text(ManagerStrings.mosque,
+                                      style: getBoldTextStyle(
+                                          fontSize: ManagerFontSize.s20,
+                                          color: ManagerColors.black)),
+                                ],
+                              ),
+                              SizedBox(
+                                height: ManagerHeight.h10,
+                              ),
+                              Text(ManagerStrings.exploreServices,
+                                  style: getBoldTextStyle(
+                                      fontSize: ManagerFontSize.s24,
+                                      color: ManagerColors.black)),
+                              SizedBox(
+                                height: ManagerHeight.h10,
+                              ),
+                              Expanded(
+                                  child: SizedBox(
+                                      child: ListView.builder(
                                           padding: const EdgeInsets.all(10),
                                           itemCount:
                                               controller.services!.length,
@@ -134,7 +139,8 @@ class BodyServices extends StatelessWidget {
                                                                         ManagerRadius
                                                                             .r10))),
                                                         child: Text(
-                                                          "Read More",
+                                                          ManagerStrings
+                                                              .readMore,
                                                           style: getBoldTextStyle(
                                                               fontSize:
                                                                   ManagerFontSize
@@ -147,15 +153,17 @@ class BodyServices extends StatelessWidget {
                                                 ],
                                               ),
                                             );
-                                          })
-                                      : const Center(
-                                          child: CircularProgressIndicator(),
-                                        ));
-                            }))
-                  ],
-                ),
-              ),
-            )),
+                                          })))
+                            ],
+                          ),
+                        ),
+                      ));
+                    } else {
+                      return const EmptyDataWidget();
+                    }
+                  }
+                  return const CircularProgressWidget();
+                }),
           ],
         ),
       ),

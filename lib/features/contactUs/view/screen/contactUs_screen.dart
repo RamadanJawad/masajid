@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:masajid/core/resources/manager_assets.dart';
 import 'package:masajid/core/resources/manager_colors.dart';
 import 'package:masajid/core/resources/manager_fonts.dart';
@@ -28,8 +29,9 @@ class ContactUsScreen extends StatelessWidget {
               const BoxDecoration(color: ManagerColors.colorTwoGradient),
           child: Column(
             children: [
-              const WidgetStack(
+              WidgetStack(
                 visible: false,
+                inflVisible: true,
                 name: ManagerStrings.contactUs,
               ),
               Expanded(
@@ -76,8 +78,7 @@ class ContactUsScreen extends StatelessWidget {
                                 SizedBox(
                                   height: ManagerHeight.h10,
                                 ),
-                                Text(
-                                    ManagerStrings.contactTitle,
+                                Text(ManagerStrings.contactTitle,
                                     textAlign: TextAlign.center,
                                     style: getBoldTextStyle(
                                         fontSize: ManagerFontSize.s20,
@@ -88,6 +89,7 @@ class ContactUsScreen extends StatelessWidget {
                                 const CustomTitle(
                                     title: ManagerStrings.fullName),
                                 textField(
+                                    hintText: "John Doe",
                                     textInputType: TextInputType.text,
                                     controller: controller.name,
                                     validator: (value) => FieldValidator()
@@ -98,7 +100,8 @@ class ContactUsScreen extends StatelessWidget {
                                 const CustomTitle(
                                     title: ManagerStrings.emailAddress),
                                 textField(
-                                  textInputType: TextInputType.emailAddress,
+                                    hintText: "example@example.com",
+                                    textInputType: TextInputType.emailAddress,
                                     controller: controller.email,
                                     validator: (value) =>
                                         FieldValidator().validateEmail(value!)),
@@ -107,16 +110,60 @@ class ContactUsScreen extends StatelessWidget {
                                 ),
                                 const CustomTitle(
                                     title: ManagerStrings.mobileNumber),
-                                textField(
-                                    textInputType: TextInputType.number,
-                                    controller: controller.phone,
-                                    validator: (value) => FieldValidator()
-                                        .validatePhoneNumber(value!)),
+                                IntlPhoneField(
+                                  onChanged: (phone) {
+                                    controller.onChange(phone);
+                                  },
+                                  controller: controller.phone,
+                                  languageCode: 'en',
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        ManagerRadius.r10,
+                                      ),
+                                      borderSide: BorderSide(
+                                        color: ManagerColors.grey,
+                                      ),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        ManagerRadius.r10,
+                                      ),
+                                      borderSide: BorderSide(
+                                        color: ManagerColors.grey,
+                                      ),
+                                    ),
+                                    contentPadding: EdgeInsets.symmetric(
+                                      vertical: ManagerHeight.h16,
+                                      horizontal: ManagerWidth.w10,
+                                    ),
+                                    counterText: '',
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        ManagerRadius.r10,
+                                      ),
+                                      borderSide: BorderSide(
+                                        color: ManagerColors.grey,
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        ManagerRadius.r10,
+                                      ),
+                                      borderSide: BorderSide(
+                                        color: ManagerColors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  initialCountryCode: 'EN',
+                                ),
                                 SizedBox(
                                   height: ManagerHeight.h10,
                                 ),
                                 const CustomTitle(title: ManagerStrings.reason),
                                 CustomDropdownWidget(
+                                  hintText: "select reason",
                                   controller: controller.reason,
                                   items: controller.isLoading
                                       ? []
@@ -125,8 +172,11 @@ class ContactUsScreen extends StatelessWidget {
                                 SizedBox(
                                   height: ManagerHeight.h10,
                                 ),
-                                const CustomTitle(title: ManagerStrings.message),
-                                textField(controller: controller.message),
+                                const CustomTitle(
+                                    title: ManagerStrings.message),
+                                textField(
+                                    hintText: "Type here ....",
+                                    controller: controller.message),
                                 SizedBox(
                                   height: ManagerHeight.h10,
                                 ),
