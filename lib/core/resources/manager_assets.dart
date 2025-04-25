@@ -42,6 +42,7 @@ class ManagerAssets {
   static const String call = "$svgPath/call.svg";
   static const String aboutUs = "$svgPath/about.svg";
   static const String mosq = "$imagesPath/mosq.png";
-  static const String mosque3 = "$imagesPath/mosque3.png";
   static const String mosque = "$imagesPath/mosque.png";
+  static const String menu = "$imagesPath/background_menu.png";
+  static const String masjid = "$imagesPath/masjid.png";
 }

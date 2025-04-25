@@ -15,74 +15,73 @@ class BodyGallery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(color: ManagerColors.colorTwoGradient),
-        child: Column(
-          children: [
-            WidgetStack(name: "Photo ${ManagerStrings.gallery}"),
-            GetBuilder<GalleryController>(
-                init: GalleryController(),
-                builder: (controller) {
-                  if (controller.isLoading) {
-                    if (controller.gallery!.isNotEmpty) {
-                      return Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(ManagerRadius.r50),
-                              topRight: Radius.circular(ManagerRadius.r50),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: ManagerWidth.w10),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: ManagerHeight.h30,
-                                ),
-                                Expanded(
-                                    child: GridView.builder(
-                                        itemCount: controller.gallery!.length,
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 5,
-                                                mainAxisSpacing: 5),
-                                        itemBuilder: (_, index) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              Get.to(() => FullScreenImageView(
-                                                    imageUrl: controller
-                                                        .gallery![index]!
-                                                        .originalUrl!,
-                                                  ));
-                                            },
-                                            child: CustomCachedImage(
-                                                imageUrl: controller
-                                                    .gallery![index]!
-                                                    .originalUrl!),
-                                          );
-                                        }))
-                              ],
-                            ),
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      padding: EdgeInsets.only(top: ManagerHeight.h30),
+      decoration: const BoxDecoration(color: ManagerColors.colorTwoGradient),
+      child: Column(
+        children: [
+          WidgetStack(name: "Photo ${ManagerStrings.gallery}"),
+          GetBuilder<GalleryController>(
+              init: GalleryController(),
+              builder: (controller) {
+                if (controller.isLoading) {
+                  if (controller.gallery!.isNotEmpty) {
+                    return Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(ManagerRadius.r50),
+                            topRight: Radius.circular(ManagerRadius.r50),
                           ),
                         ),
-                      );
-                    } else {
-                      return const EmptyDataWidget();
-                    }
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: ManagerWidth.w10),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: ManagerHeight.h30,
+                              ),
+                              Expanded(
+                                  child: GridView.builder(
+                                      itemCount: controller.gallery!.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              crossAxisSpacing: 5,
+                                              mainAxisSpacing: 5),
+                                      itemBuilder: (_, index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Get.to(() => FullScreenImageView(
+                                                  imageUrl: controller
+                                                      .gallery![index]!
+                                                      .originalUrl!,
+                                                ));
+                                          },
+                                          child: CustomCachedImage(
+                                              imageUrl: controller
+                                                  .gallery![index]!
+                                                  .originalUrl!),
+                                        );
+                                      }))
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const EmptyDataWidget();
                   }
-                  return const CircularProgressWidget();
-                }),
-          ],
-        ),
+                }
+                return const CircularProgressWidget();
+              }),
+        ],
       ),
     );
   }

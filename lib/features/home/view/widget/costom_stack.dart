@@ -12,17 +12,22 @@ import 'package:masajid/features/home/view/widget/menu_widget.dart';
 
 class CustomStack extends StatelessWidget {
   const CustomStack({
-    super.key, required this.currentPray,
+    super.key,
+    required this.currentPrayName,
+    required this.currentPrayTime,
   });
 
-  final String currentPray;
+  final String currentPrayName;
+  final String currentPrayTime;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(ManagerAssets.mosque),
+          image: AssetImage(
+            ManagerAssets.mosque,
+          ),
           fit: BoxFit.cover,
         ),
       ),
@@ -31,7 +36,7 @@ class CustomStack extends StatelessWidget {
             left: ManagerWidth.w10,
             right: ManagerWidth.w10,
             top: ManagerHeight.h36,
-            bottom: ManagerHeight.h20),
+            bottom: ManagerHeight.h30),
         child: Column(
           children: [
             SizedBox(
@@ -40,34 +45,31 @@ class CustomStack extends StatelessWidget {
             IntrinsicHeight(
               child: Row(
                 children: [
-                  Text(
-                    "Suhur : ",
-                    style: getRegularTextStyle(
-                        fontSize: ManagerFontSize.s13,
-                        color: ManagerColors.white),
-                  ),
-                  Text(
-                    "4:14 AM",
-                    style: getRegularTextStyle(
-                        fontSize: ManagerFontSize.s13,
-                        color: ManagerColors.white),
-                  ),
-                  VerticalDivider(
-                    color: ManagerColors.yellowColor,
-                    width: ManagerWidth.w10,
-                    thickness: 1,
-                  ),
-                  Text(
-                    "Iftar : ",
-                    style: getRegularTextStyle(
-                        fontSize: ManagerFontSize.s13,
-                        color: ManagerColors.white),
-                  ),
-                  Text(
-                    "4:14 PM",
-                    style: getRegularTextStyle(
-                        fontSize: ManagerFontSize.s13,
-                        color: ManagerColors.white),
+                  Visibility(
+                    visible: HijriCalendar.now().longMonthName == "Ramadan"
+                        ? true
+                        : false,
+                    child: Row(
+                      children: [
+                        Text(
+                          "Suhur : 4:14 AM",
+                          style: getRegularTextStyle(
+                              fontSize: ManagerFontSize.s13,
+                              color: ManagerColors.white),
+                        ),
+                        VerticalDivider(
+                          color: ManagerColors.yellowColor,
+                          width: ManagerWidth.w10,
+                          thickness: 1,
+                        ),
+                        Text(
+                          "Iftar : 5:14pm",
+                          style: getRegularTextStyle(
+                              fontSize: ManagerFontSize.s13,
+                              color: ManagerColors.white),
+                        ),
+                      ],
+                    ),
                   ),
                   const Spacer(),
                   InkWell(
@@ -101,7 +103,7 @@ class CustomStack extends StatelessWidget {
                         color: ManagerColors.white),
                   ),
                   Text(
-                    currentPray,
+                    currentPrayName,
                     style: getBoldTextStyle(
                         fontSize: ManagerFontSize.s26,
                         color: ManagerColors.white),
@@ -112,13 +114,13 @@ class CustomStack extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "${DateFormat('hh:mm').format(DateTime.now())} ",
+                  currentPrayTime,
                   style: getBoldTextStyle(
-                      fontSize: ManagerFontSize.s26,
+                      fontSize: ManagerFontSize.s24,
                       color: ManagerColors.white),
                 ),
                 Text(
-                  "(Start time)",
+                  " (Start time)",
                   style: getRegularTextStyle(
                       fontSize: ManagerFontSize.s12,
                       color: ManagerColors.white),
@@ -127,7 +129,7 @@ class CustomStack extends StatelessWidget {
                 Text(
                   DateFormat('d MMMM, y').format(DateTime.now()),
                   style: getRegularTextStyle(
-                    fontSize: ManagerFontSize.s13,
+                    fontSize: ManagerFontSize.s12,
                     color: ManagerColors.white,
                   ),
                 ),
@@ -136,7 +138,7 @@ class CustomStack extends StatelessWidget {
                 ),
                 SvgPicture.asset(
                   ManagerAssets.calender1,
-                  width: ManagerWidth.w20,
+                  width: ManagerWidth.w18,
                 ),
                 SizedBox(
                   width: ManagerWidth.w4,
@@ -151,19 +153,19 @@ class CustomStack extends StatelessWidget {
                 Text(
                   "1 hour 50 min left",
                   style: getRegularTextStyle(
-                      fontSize: ManagerFontSize.s13,
+                      fontSize: ManagerFontSize.s12,
                       color: ManagerColors.white),
                 ),
                 const Spacer(),
                 Text(
                   "${HijriCalendar.now().longMonthName} | ${HijriCalendar.now().hDay}, ${HijriCalendar.now().hYear} AH ",
                   style: getRegularTextStyle(
-                      fontSize: ManagerFontSize.s13,
+                      fontSize: ManagerFontSize.s12,
                       color: ManagerColors.white),
                 ),
                 SvgPicture.asset(
                   ManagerAssets.calender2,
-                  width: ManagerWidth.w20,
+                  width: ManagerWidth.w18,
                 ),
                 SizedBox(
                   width: ManagerWidth.w4,

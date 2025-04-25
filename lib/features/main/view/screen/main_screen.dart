@@ -19,10 +19,7 @@ class MainScreen extends StatelessWidget {
                 backgroundColor: Colors.white,
                 bottomNavigationBar: SafeArea(
                   child: Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: ManagerWidth.w16,
-                        vertical: ManagerHeight.h10),
-                    height: ManagerHeight.h54,
+                    height: ManagerHeight.h60,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
@@ -32,13 +29,12 @@ class MainScreen extends StatelessWidget {
                           offset: const Offset(0, 10),
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(50),
                     ),
                     child: ListView.builder(
                       itemCount: 4,
                       scrollDirection: Axis.horizontal,
                       padding:
-                          EdgeInsets.symmetric(horizontal: ManagerWidth.w14),
+                          EdgeInsets.symmetric(horizontal: ManagerWidth.w16),
                       itemBuilder: (context, index) => InkWell(
                         onTap: () {
                           controller.changeIndex(index);
@@ -53,9 +49,9 @@ class MainScreen extends StatelessWidget {
                               curve: Curves.fastLinearToSlowEaseIn,
                               margin: EdgeInsets.only(
                                 bottom:
-                                    index == controller.currentIndex ? 0 : 5,
-                                right: ManagerWidth.w20,
-                                left: ManagerWidth.w20,
+                                    index == controller.currentIndex ? 0 : 10,
+                                right: ManagerWidth.w24,
+                                left: ManagerWidth.w24,
                               ),
                               width: ManagerWidth.w40,
                               height: index == controller.currentIndex

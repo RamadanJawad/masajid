@@ -36,23 +36,22 @@ class ShimmerWidget extends StatelessWidget {
             ),
           ),
            SizedBox(height: ManagerHeight.h10),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Shimmer.fromColors(
-                  baseColor: Colors.grey[300]!,
-                  highlightColor: Colors.white,
-                  child: Container(
-                    margin: EdgeInsets.symmetric(
-                        vertical: ManagerHeight.h4),
-                    height: ManagerHeight.h50,
-                    width: double.infinity,
-                    color: Colors.grey[300],
-                  ),
-                );
-              },
-            ),
+          ListView.builder(
+            itemCount: 7,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.white,
+                child: Container(
+                  margin: EdgeInsets.symmetric(
+                      vertical: ManagerHeight.h4),
+                  height: ManagerHeight.h50,
+                  width: double.infinity,
+                  color: Colors.grey[300],
+                ),
+              );
+            },
           ),
         ],
       ),

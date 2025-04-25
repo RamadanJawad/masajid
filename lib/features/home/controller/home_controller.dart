@@ -9,13 +9,14 @@ import 'package:masajid/features/home/model/features.dart';
 import 'package:masajid/features/home/model/masjid_details.dart';
 
 class HomeController extends GetxController {
-  String? currentPray;
+  String? currentPrayName;
   String? prayTime;
   PrayerTimes? prayerTimes;
   Coordinates? coordinates;
   CalculationParameters? parameter;
   List prayTimeData = [];
   bool isLoading = true;
+  String? currentPrayTime;
   bool isLoadingMenu = false;
   List<Features?>? features;
   DateTime dateTime = DateTime.now();
@@ -95,12 +96,12 @@ class HomeController extends GetxController {
         "salahIqaamah": DateFormat.jm()
             .format(prayerTimes!.isha.add(const Duration(minutes: 10)))
       },
-      {
-        "name": "Friday Prayers                                 ",
-        "time": prayerTimes!.dhuhr,
-        "salahBegin": DateFormat.jm().format(prayerTimes!.dhuhr),
-        "salahIqaamah": ""
-      },
+      // {
+      //   "name": "Friday Prayers                                 ",
+      //   "time": prayerTimes!.dhuhr,
+      //   "salahBegin": DateFormat.jm().format(prayerTimes!.dhuhr),
+      //   "salahIqaamah": ""
+      // },
     ];
 
     determineCurrentPrayer();
@@ -113,7 +114,9 @@ class HomeController extends GetxController {
     for (var prayer in prayTimeData) {
       DateTime prayerTime = prayer["time"];
       if (now.isAfter(prayerTime)) {
-        currentPray = prayer["name"];
+        currentPrayName = prayer["name"];
+        currentPrayTime = prayer["salahBegin"];
+        dateTime = prayer["time"];
       }
     }
     update();

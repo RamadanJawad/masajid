@@ -20,7 +20,7 @@ class EventsWidget extends StatelessWidget {
               title: Text(
                 controller.events![index]!.title!,
                 style: getRegularTextStyle(
-                    fontSize: ManagerFontSize.s18, color: ManagerColors.black),
+                    fontSize: ManagerFontSize.s16, color: ManagerColors.black),
               ),
               subtitle: Text(
                 controller.events![index]!.place!,
@@ -34,7 +34,7 @@ class EventsWidget extends StatelessWidget {
                   "${DateFormat('d').format(DateTime.parse(controller.events![index]!.start!))}\n${DateFormat('MMM').format(DateTime.parse(controller.events![index]!.start!))}",
                   textAlign: TextAlign.center,
                   style: getBoldTextStyle(
-                      fontSize: ManagerFontSize.s18,
+                      fontSize: ManagerFontSize.s14,
                       color: ManagerColors.white),
                 ),
               ),

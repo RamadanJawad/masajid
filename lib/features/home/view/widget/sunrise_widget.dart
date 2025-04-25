@@ -13,17 +13,17 @@ class SunriseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ManagerHeight.h70,
+      height: ManagerHeight.h80,
       decoration: BoxDecoration(
           borderRadius:
           BorderRadius.circular(ManagerRadius.r10),
           border: Border.all(
               color:
-              ManagerColors.grey.withOpacity(0.3))),
+              ManagerColors.borderColor)),
       child: Container(
-        margin: const EdgeInsets.all(10),
+        margin:  EdgeInsets.symmetric(vertical: ManagerHeight.h14,horizontal: ManagerWidth.w16),
         padding: EdgeInsets.symmetric(
-            horizontal: ManagerWidth.w10),
+            horizontal: ManagerWidth.w14),
         decoration: BoxDecoration(
           color: ManagerColors.yellowColor,
           borderRadius:
@@ -33,14 +33,14 @@ class SunriseWidget extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundColor: ManagerColors.white,
-              radius: ManagerRadius.r14,
+              radius: ManagerRadius.r10,
               child: Container(
-                width: ManagerWidth.w10,
-                height: ManagerHeight.h10,
+                width: ManagerWidth.w8,
+                height: ManagerHeight.h8,
                 decoration: BoxDecoration(
                     color: ManagerColors.yellowColor,
                     borderRadius: BorderRadius.circular(
-                        ManagerRadius.r50)),
+                        ManagerRadius.r40)),
               ),
             ),
             SizedBox(
@@ -48,15 +48,15 @@ class SunriseWidget extends StatelessWidget {
             ),
             Text(
               ManagerStrings.sunRise,
-              style: getRegularTextStyle(
-                  fontSize: ManagerFontSize.s20,
+              style: getMediumTextStyle(
+                  fontSize: ManagerFontSize.s16,
                   color: ManagerColors.textColor),
             ),
             const Spacer(),
             Text(
               sunrise,
-              style: getRegularTextStyle(
-                  fontSize: ManagerFontSize.s20,
+              style: getMediumTextStyle(
+                  fontSize: ManagerFontSize.s16,
                   color: ManagerColors.textColor),
             )
           ],

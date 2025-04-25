@@ -9,6 +9,7 @@ import 'package:masajid/core/resources/manager_styles.dart';
 import 'package:masajid/features/home/controller/home_controller.dart';
 import 'package:masajid/features/home/view/widget/costom_stack.dart';
 import 'package:masajid/features/home/view/widget/custom_praytime.dart';
+import 'package:masajid/features/home/view/widget/friday_widget.dart';
 import 'package:masajid/features/home/view/widget/shimmer_widget.dart';
 import 'package:masajid/features/home/view/widget/sunrise_widget.dart';
 
@@ -25,142 +26,133 @@ class BodyHome extends StatelessWidget {
             height: double.infinity,
             decoration:
                 const BoxDecoration(color: ManagerColors.colorTwoGradient),
-            child: Column(
-              children: [
-                CustomStack(
-                  currentPray: controller.currentPray ?? "",
-                ),
-                Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(ManagerRadius.r50),
-                        topRight: Radius.circular(ManagerRadius.r50),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomStack(
+                    currentPrayName: controller.currentPrayName ?? "",
+                    currentPrayTime: controller.currentPrayTime ?? "",
+                  ),
+                  Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(ManagerRadius.r50),
+                          topRight: Radius.circular(ManagerRadius.r50),
+                        ),
                       ),
-                    ),
-                    child: Padding(
+                      child: Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: ManagerWidth.w10),
+                            EdgeInsets.symmetric(horizontal: ManagerWidth.w16),
                         child: controller.isLoading
                             ? const ShimmerWidget()
                             : Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SizedBox(
-                                    height: ManagerHeight.h10,
-                                  ),
+                                  SizedBox(height: ManagerHeight.h30),
                                   Text(
                                     ManagerStrings.prayingTimes,
                                     style: getBoldTextStyle(
-                                        fontSize: ManagerFontSize.s20,
-                                        color: ManagerColors.black),
+                                      fontSize: ManagerFontSize.s20,
+                                      color: ManagerColors.black,
+                                    ),
                                   ),
-                                  SizedBox(
-                                    height: ManagerHeight.h10,
-                                  ),
+                                  SizedBox(height: ManagerHeight.h16),
                                   SunriseWidget(
                                     sunrise: DateFormat.jm().format(
                                         controller.prayerTimes!.sunrise),
                                   ),
-                                  SizedBox(
-                                    height: ManagerHeight.h10,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            ManagerRadius.r10),
-                                        border: Border.all(
-                                          color: ManagerColors.grey
-                                              .withOpacity(0.3),
-                                        ),
+                                  SizedBox(height: ManagerHeight.h10),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          ManagerRadius.r10),
+                                      border: Border.all(
+                                        color: ManagerColors.borderColor,
                                       ),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: ManagerWidth.w10,
-                                            vertical: ManagerHeight.h12),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  " Salah        ",
-                                                  style: getBoldTextStyle(
-                                                      fontSize:
-                                                          ManagerFontSize.s16,
-                                                      color: ManagerColors
-                                                          .colorOneGradient),
-                                                ),
-                                                Text(
-                                                  "Begins",
-                                                  style: getBoldTextStyle(
-                                                      fontSize:
-                                                          ManagerFontSize.s16,
-                                                      color: ManagerColors
-                                                          .colorOneGradient),
-                                                ),
-                                                Text(
-                                                  "Iqamah   ",
-                                                  style: getBoldTextStyle(
-                                                      fontSize:
-                                                          ManagerFontSize.s16,
-                                                      color: ManagerColors
-                                                          .colorOneGradient),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: ManagerHeight.h6,
-                                            ),
-                                            Expanded(
-                                              child: ListView.builder(
-                                                itemCount: controller
-                                                    .prayTimeData.length,
-                                                padding:
-                                                    const EdgeInsets.all(0),
-                                                itemBuilder: (context, index) {
-                                                  return CustomPrayTime(
-                                                    salahName: controller
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: ManagerWidth.w16,
+                                        vertical: ManagerHeight.h20,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                " Salah       ",
+                                                style: getBoldTextStyle(
+                                                    fontSize:
+                                                        ManagerFontSize.s16,
+                                                    color: ManagerColors
+                                                        .colorTwoGradient),
+                                              ),
+                                              Text(
+                                                "Begins",
+                                                style: getBoldTextStyle(
+                                                    fontSize:
+                                                        ManagerFontSize.s16,
+                                                    color: ManagerColors
+                                                        .colorTwoGradient),
+                                              ),
+                                              Text(
+                                                "Iqamah   ",
+                                                style: getBoldTextStyle(
+                                                    fontSize:
+                                                        ManagerFontSize.s16,
+                                                    color: ManagerColors
+                                                        .colorTwoGradient),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: ManagerHeight.h14,
+                                          ),
+                                          ListView.builder(
+                                            shrinkWrap: true,
+                                            padding: const EdgeInsets.all(0),
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            itemCount:
+                                                controller.prayTimeData.length,
+                                            itemBuilder: (context, index) {
+                                              return CustomPrayTime(
+                                                salahName: controller
+                                                        .prayTimeData[index]
+                                                    ['name'],
+                                                salahBegin: controller
+                                                        .prayTimeData[index]
+                                                    ['salahBegin'],
+                                                salahIqaamah: controller
+                                                        .prayTimeData[index]
+                                                    ['salahIqaamah'],
+                                                isCurrent: controller
+                                                        .currentPrayName ==
+                                                    controller
                                                             .prayTimeData[index]
                                                         ['name'],
-                                                    salahBegin: controller
-                                                            .prayTimeData[index]
-                                                        ['salahBegin'],
-                                                    salahIqaamah: controller
-                                                            .prayTimeData[index]
-                                                        ['salahIqaamah'],
-                                                    isCurrent: controller
-                                                            .currentPray ==
-                                                        controller.prayTimeData[
-                                                            index]['name'],
-                                                    isNotificationEnabled: controller
-                                                            .selectedNotificationPrayer ==
-                                                        controller.prayTimeData[
-                                                            index]['name'],
-                                                    onToggleNotification: () =>
-                                                        controller.toggleNotification(
-                                                            controller
-                                                                    .prayTimeData[
-                                                                index]['name']),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                              );
+                                            },
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
+                                  SizedBox(height: ManagerHeight.h20),
+                                  FridayWidget(
+                                    fridayPrayersTime: controller
+                                        .prayTimeData[1]['salahBegin'],
+                                  ),
+                                  SizedBox(height: ManagerHeight.h20),
                                 ],
-                              )),
-                  ),
-                )
-              ],
+                              ),
+                      ))
+                ],
+              ),
             ),
           );
         });

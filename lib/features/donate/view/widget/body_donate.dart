@@ -18,108 +18,111 @@ class BodyDonate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(color: ManagerColors.colorTwoGradient),
-        child: Column(
-          children: [
-            WidgetStack(
-              name: ManagerStrings.donate,
-              visible: false,
-            ),
-            GetBuilder<DonateController>(
-                init: DonateController(),
-                builder: (controller) {
-                  if (controller.isLoading) {
-                    if (controller.donate != null) {
-                      return Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(ManagerRadius.r50),
-                              topRight: Radius.circular(ManagerRadius.r50),
-                            ),
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      padding: EdgeInsets.only(top: ManagerHeight.h30),
+      decoration: const BoxDecoration(color: ManagerColors.colorTwoGradient),
+      child: Column(
+        children: [
+          WidgetStack(
+            name: ManagerStrings.donate,
+            visible: false,
+          ),
+          GetBuilder<DonateController>(
+              init: DonateController(),
+              builder: (controller) {
+                if (controller.isLoading) {
+                  if (controller.donate != null) {
+                    return Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(ManagerRadius.r50),
+                            topRight: Radius.circular(ManagerRadius.r50),
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: ManagerWidth.w10),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: ManagerHeight.h20,
-                                    width: double.infinity,
-                                  ),
-                                  Text("Donate to Burlington Mosque",
-                                      style: getRegularTextStyle(
-                                          fontSize: ManagerFontSize.s20,
-                                          color: ManagerColors.black)),
-                                  SizedBox(
-                                    height: ManagerHeight.h20,
-                                  ),
-                                  Stack(
-                                    clipBehavior: Clip.none,
-                                    children: [
-                                      CustomCachedImage(
-                                          imageUrl: controller
-                                              .donate!.image!.originalUrl!),
-                                      Positioned(
-                                        left: -30, // Adjust positioning
-                                        bottom: -30,
-                                        child: SvgPicture.asset(
-                                          ManagerAssets
-                                              .border, // Replace with your local green frame asset
-                                        ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: ManagerWidth.w10),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: ManagerHeight.h20,
+                                  width: double.infinity,
+                                ),
+                                Text("Donate to Burlington Mosque",
+                                    style: getRegularTextStyle(
+                                        fontSize: ManagerFontSize.s20,
+                                        color: ManagerColors.black)),
+                                SizedBox(
+                                  height: ManagerHeight.h20,
+                                ),
+                                Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    CustomCachedImage(
+                                        imageUrl: controller
+                                            .donate!.image!.originalUrl!),
+                                    Positioned(
+                                      left: -30, // Adjust positioning
+                                      bottom: -30,
+                                      child: SvgPicture.asset(
+                                        ManagerAssets
+                                            .border, // Replace with your local green frame asset
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: ManagerHeight.h30,
-                                  ),
-                                  Text(controller.donate!.message!,
-                                      style: getRegularTextStyle(
-                                          fontSize: ManagerFontSize.s16,
-                                          color: ManagerColors.black)),
-                                  SizedBox(
-                                    height: ManagerHeight.h20,
-                                  ),
-                                  ElevatedButton(
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: ManagerHeight.h30,
+                                ),
+                                Text(controller.donate!.message!,
+                                    style: getRegularTextStyle(
+                                        fontSize: ManagerFontSize.s16,
+                                        color: ManagerColors.black)),
+                                SizedBox(
+                                  height: ManagerHeight.h20,
+                                ),
+                                SizedBox(
+                                  height: ManagerHeight.h50,
+                                  width: double.infinity,
+                                  child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                           padding: const EdgeInsets.all(10),
                                           shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      ManagerRadius.r10)),
+                                              borderRadius: BorderRadius.circular(
+                                                  ManagerRadius.r10)),
                                           backgroundColor:
                                               ManagerColors.colorTwoGradient),
                                       onPressed: () {
-                                        controller.openLink("www.google.com");
+                                        controller
+                                            .openLink(controller.donate!.link!);
                                       },
                                       child: Text(
-                                        "Donate Now",
+                                        "Donate",
                                         style: getRegularTextStyle(
-                                            fontSize: ManagerFontSize.s20,
+                                            fontSize: ManagerFontSize.s18,
                                             color: ManagerColors.white),
-                                      ))
-                                ],
-                              ),
+                                      )),
+                                )
+                              ],
                             ),
                           ),
                         ),
-                      );
-                    } else {
-                      return const EmptyDataWidget();
-                    }
+                      ),
+                    );
+                  } else {
+                    return const EmptyDataWidget();
                   }
-                  return const CircularProgressWidget();
-                }),
-          ],
-        ),
+                }
+                return const CircularProgressWidget();
+              }),
+        ],
       ),
     );
   }

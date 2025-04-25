@@ -38,34 +38,34 @@ Widget textField({
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          ManagerRadius.r10,
+          ManagerRadius.r4,
         ),
         borderSide: BorderSide(
-          color: ManagerColors.grey,
+          color: Colors.grey.shade300,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          ManagerRadius.r10,
+          ManagerRadius.r4,
         ),
         borderSide: BorderSide(
-          color: ManagerColors.grey,
+          color: Colors.grey.shade300,
         ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          ManagerRadius.r10,
+          ManagerRadius.r4,
         ),
         borderSide: BorderSide(
-          color: ManagerColors.grey,
+          color: Colors.grey.shade300,
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          ManagerRadius.r10,
+          ManagerRadius.r4,
         ),
         borderSide: BorderSide(
-          color: ManagerColors.grey,
+          color: Colors.grey.shade300,
         ),
       ),
       filled: true,

@@ -21,134 +21,133 @@ class TasbihScreen extends StatelessWidget {
         body: GetBuilder<TasbihController>(
             init: TasbihController(),
             builder: (controller) {
-              return SafeArea(
-                child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: const BoxDecoration(
-                      color: ManagerColors.colorTwoGradient),
-                  child: Column(
-                    children: [
-                      WidgetStack(
-                        name: ManagerStrings.tasbih,
-                      ),
-                      Expanded(
-                          child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(ManagerRadius.r50),
-                            topRight: Radius.circular(ManagerRadius.r50),
-                          ),
+              return Container(
+                width: double.infinity,
+                height: double.infinity,
+                padding: EdgeInsets.only(top: ManagerHeight.h30),
+                decoration: const BoxDecoration(
+                    color: ManagerColors.colorTwoGradient),
+                child: Column(
+                  children: [
+                    WidgetStack(
+                      name: ManagerStrings.tasbih,
+                    ),
+                    Expanded(
+                        child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(ManagerRadius.r50),
+                          topRight: Radius.circular(ManagerRadius.r50),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: ManagerWidth.w10),
-                          child: SingleChildScrollView(
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: ManagerHeight.h30,
-                                  ),
-                                  DropdownWidget(controller: controller),
-                                  SizedBox(
-                                    height: ManagerHeight.h6,
-                                  ),
-                                  Text(
-                                    controller.selectedEnTasbih,
-                                    style: getRegularTextStyle(
-                                        fontSize: ManagerFontSize.s16,
-                                        color: ManagerColors.black
-                                            .withOpacity(0.5)),
-                                  ),
-                                  SizedBox(
-                                    height: ManagerHeight.h6,
-                                  ),
-                                  Text(
-                                    controller.selectedPronunciation,
-                                    style: getRegularTextStyle(
-                                        fontSize: ManagerFontSize.s16,
-                                        color: ManagerColors.colorTwoGradient),
-                                  ),
-                                  RadialGaugeWidget(controller: controller),
-                                  Center(
-                                    child: Container(
-                                      width: ManagerWidth.w180,
-                                      height: ManagerHeight.h60,
-                                      decoration: BoxDecoration(
-                                          color: const Color(0xffF3F8FB),
-                                          borderRadius: BorderRadius.circular(
-                                              ManagerRadius.r30)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 30,
-                                            backgroundColor:
-                                                ManagerColors.colorTwoGradient,
-                                            child: IconButton(
-                                              onPressed: () {
-                                                controller.sub();
-                                              },
-                                              icon: Icon(
-                                                Icons.remove,
-                                                color: ManagerColors.white,
-                                                size: ManagerIconSize.s30,
-                                              ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: ManagerWidth.w10),
+                        child: SingleChildScrollView(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: ManagerHeight.h30,
+                                ),
+                                DropdownWidget(controller: controller),
+                                SizedBox(
+                                  height: ManagerHeight.h6,
+                                ),
+                                Text(
+                                  controller.selectedEnTasbih,
+                                  style: getRegularTextStyle(
+                                      fontSize: ManagerFontSize.s16,
+                                      color: ManagerColors.black
+                                          .withOpacity(0.5)),
+                                ),
+                                SizedBox(
+                                  height: ManagerHeight.h6,
+                                ),
+                                Text(
+                                  controller.selectedPronunciation,
+                                  style: getRegularTextStyle(
+                                      fontSize: ManagerFontSize.s16,
+                                      color: ManagerColors.colorTwoGradient),
+                                ),
+                                RadialGaugeWidget(controller: controller),
+                                Center(
+                                  child: Container(
+                                    width: ManagerWidth.w180,
+                                    height: ManagerHeight.h60,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xffF3F8FB),
+                                        borderRadius: BorderRadius.circular(
+                                            ManagerRadius.r30)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 30,
+                                          backgroundColor:
+                                              ManagerColors.colorTwoGradient,
+                                          child: IconButton(
+                                            onPressed: () {
+                                              controller.sub();
+                                            },
+                                            icon: Icon(
+                                              Icons.remove,
+                                              color: ManagerColors.white,
+                                              size: ManagerIconSize.s30,
                                             ),
                                           ),
-                                          Text(
-                                            controller.maximum
-                                                .toInt()
-                                                .toString(),
-                                            style: getBoldTextStyle(
-                                                fontSize: ManagerFontSize.s20,
-                                                color: ManagerColors.black),
-                                          ),
-                                          CircleAvatar(
-                                            radius: ManagerRadius.r30,
-                                            backgroundColor:
-                                                ManagerColors.colorTwoGradient,
-                                            child: IconButton(
-                                              onPressed: () {
-                                                controller.add();
-                                              },
-                                              icon: Icon(
-                                                Icons.add,
-                                                color: ManagerColors.white,
-                                                size: ManagerIconSize.s30,
-                                              ),
+                                        ),
+                                        Text(
+                                          controller.maximum
+                                              .toInt()
+                                              .toString(),
+                                          style: getBoldTextStyle(
+                                              fontSize: ManagerFontSize.s20,
+                                              color: ManagerColors.black),
+                                        ),
+                                        CircleAvatar(
+                                          radius: ManagerRadius.r30,
+                                          backgroundColor:
+                                              ManagerColors.colorTwoGradient,
+                                          child: IconButton(
+                                            onPressed: () {
+                                              controller.add();
+                                            },
+                                            icon: Icon(
+                                              Icons.add,
+                                              color: ManagerColors.white,
+                                              size: ManagerIconSize.s30,
                                             ),
-                                          )
-                                        ],
-                                      ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                  Center(
-                                    child: TextButton(
-                                        onPressed: () {
-                                          controller.reset();
-                                        },
-                                        child: Text(
-                                          ManagerStrings.reset,
-                                          style: getRegularTextStyle(
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              fontSize: ManagerFontSize.s18,
-                                              color: ManagerColors
-                                                  .colorTwoGradient),
-                                        )),
-                                  )
-                                ]),
-                          ),
+                                ),
+                                Center(
+                                  child: TextButton(
+                                      onPressed: () {
+                                        controller.reset();
+                                      },
+                                      child: Text(
+                                        ManagerStrings.reset,
+                                        style: getRegularTextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            fontSize: ManagerFontSize.s18,
+                                            color: ManagerColors
+                                                .colorTwoGradient),
+                                      )),
+                                )
+                              ]),
                         ),
-                      )),
-                    ],
-                  ),
+                      ),
+                    )),
+                  ],
                 ),
               );
             }),

@@ -13,7 +13,6 @@ class MenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Dialog(
       backgroundColor: ManagerColors.white,
       shape: RoundedRectangleBorder(
@@ -70,15 +69,15 @@ class MenuWidget extends StatelessWidget {
                                 radius: ManagerRadius.r30,
                                 child: SvgPicture.network(
                                   availableFeatures[index]!.icon!.originalUrl!,
-                                  width: ManagerWidth.w30,
+                                  width: ManagerWidth.w26,
                                 ),
                               ),
                             ),
                             Text(
                               availableFeatures[index]!.name!,
-                              style: getBoldTextStyle(
+                              style: getMediumTextStyle(
                                 overflow: TextOverflow.ellipsis,
-                                fontSize: ManagerFontSize.s15,
+                                fontSize: ManagerFontSize.s13,
                                 color: ManagerColors.textColor,
                               ),
                             ),

@@ -18,62 +18,61 @@ class QiblaScreen extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
-        body: SafeArea(
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration:
-                const BoxDecoration(color: ManagerColors.colorTwoGradient),
-            child: Column(
-              children: [
-                WidgetStack(
-                  name: ManagerStrings.qibla,
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          padding: EdgeInsets.only(top: ManagerHeight.h30),
+          decoration:
+              const BoxDecoration(color: ManagerColors.colorTwoGradient),
+          child: Column(
+            children: [
+              WidgetStack(
+                name: ManagerStrings.qibla,
+              ),
+              Expanded(
+                  child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(ManagerRadius.r50),
+                    topRight: Radius.circular(ManagerRadius.r50),
+                  ),
                 ),
-                Expanded(
-                    child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(ManagerRadius.r50),
-                      topRight: Radius.circular(ManagerRadius.r50),
-                    ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: ManagerWidth.w10),
+                  child: Column(
+                    children: [
+                      FutureBuilder(
+                        future: FlutterQiblah.androidDeviceSensorSupport(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                strokeWidth: ManagerWidth.w2,
+                              ),
+                            );
+                          }
+                          if (snapshot.hasError) {
+                            return Center(
+                              child:
+                                  Text('Error: ${snapshot.error.toString()}'),
+                            );
+                          }
+                          if (snapshot.hasData) {
+                            return const QiblaCompass();
+                          } else {
+                            return const Text('Error');
+                          }
+                        },
+                      ),
+                    ],
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: ManagerWidth.w10),
-                    child: Column(
-                      children: [
-                        FutureBuilder(
-                          future: FlutterQiblah.androidDeviceSensorSupport(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  strokeWidth: ManagerWidth.w2,
-                                ),
-                              );
-                            }
-                            if (snapshot.hasError) {
-                              return Center(
-                                child:
-                                    Text('Error: ${snapshot.error.toString()}'),
-                              );
-                            }
-                            if (snapshot.hasData) {
-                              return const QiblaCompass();
-                            } else {
-                              return const Text('Error');
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-              ],
-            ),
+                ),
+              )),
+            ],
           ),
         ),
       ),

@@ -60,3 +60,13 @@ TextStyle getBoldTextStyle({
   return _getTextStyle(fontSize, ManagerFontFamily.fontFamily,
       ManagerFontWeight.bold, color, decoration, overflow);
 }
+
+TextStyle getMediumTextStyle({
+  required double fontSize,
+  required Color color,
+  TextDecoration decoration = TextDecoration.none,
+  dynamic overflow = TextOverflow.visible,
+}) {
+  return _getTextStyle(fontSize, ManagerFontFamily.fontFamily,
+      ManagerFontWeight.medium, color, decoration, overflow);
+}

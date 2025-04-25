@@ -8,17 +8,13 @@ import 'package:masajid/core/resources/manager_colors.dart';
 import 'package:masajid/core/resources/manager_fonts.dart';
 import 'package:masajid/core/resources/manager_sizes.dart';
 import 'package:masajid/core/resources/manager_styles.dart';
-import 'package:masajid/features/contactUs/view/screen/contact.dart';
 import 'package:masajid/features/home/controller/home_controller.dart';
 
 class WidgetStack extends StatelessWidget {
-  WidgetStack(
-      {Key? key, required this.name, this.visible, this.inflVisible = false})
-      : super(key: key);
+  WidgetStack({Key? key, required this.name, this.visible}) : super(key: key);
 
   final String name;
   final bool? visible;
-  bool inflVisible;
   final controller = Get.put<HomeController>(HomeController());
   @override
   Widget build(BuildContext context) {
@@ -29,8 +25,11 @@ class WidgetStack extends StatelessWidget {
         fit: BoxFit.cover,
       )),
       child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: ManagerWidth.w10, vertical: ManagerHeight.h10),
+        padding: EdgeInsets.only(
+            left: ManagerWidth.w10,
+            right: ManagerWidth.w10,
+            top: ManagerHeight.h10,
+            bottom: ManagerHeight.h30),
         child: Column(
           children: [
             SizedBox(
@@ -57,18 +56,6 @@ class WidgetStack extends StatelessWidget {
                       color: ManagerColors.white),
                 ),
                 const Spacer(),
-                Visibility(
-                  visible: inflVisible,
-                  child: IconButton(
-                      onPressed: () {
-                        Get.to(() => ContactScreen());
-                      },
-                      icon: Icon(
-                        Icons.info,
-                        color: ManagerColors.white,
-                        size: ManagerIconSize.s30,
-                      )),
-                ),
               ],
             ),
             SizedBox(
@@ -84,7 +71,7 @@ class WidgetStack extends StatelessWidget {
                         color: ManagerColors.white),
                   ),
                   Text(
-                    controller.currentPray!,
+                    controller.currentPrayName!,
                     style: getBoldTextStyle(
                         fontSize: ManagerFontSize.s22,
                         color: ManagerColors.white),
@@ -92,19 +79,16 @@ class WidgetStack extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: ManagerHeight.h10,
-            ),
             Row(
               children: [
                 Text(
-                  DateFormat('hh:mm').format(DateTime.now()),
+                  controller.currentPrayTime!,
                   style: getBoldTextStyle(
                       fontSize: ManagerFontSize.s22,
                       color: ManagerColors.white),
                 ),
                 Text(
-                  "(start time)",
+                  " (start time)",
                   style: getRegularTextStyle(
                       fontSize: ManagerFontSize.s12,
                       color: ManagerColors.white),
@@ -113,7 +97,7 @@ class WidgetStack extends StatelessWidget {
                 Text(
                   DateFormat('d MMMM, y').format(DateTime.now()),
                   style: getRegularTextStyle(
-                      fontSize: ManagerFontSize.s13,
+                      fontSize: ManagerFontSize.s12,
                       color: ManagerColors.white),
                 ),
                 SizedBox(
@@ -121,7 +105,7 @@ class WidgetStack extends StatelessWidget {
                 ),
                 SvgPicture.asset(
                   ManagerAssets.calender1,
-                  width: ManagerWidth.w20,
+                  width: ManagerWidth.w18,
                 )
               ],
             ),
@@ -133,19 +117,19 @@ class WidgetStack extends StatelessWidget {
                 Text(
                   "1 hour 50 min left",
                   style: getRegularTextStyle(
-                      fontSize: ManagerFontSize.s13,
+                      fontSize: ManagerFontSize.s12,
                       color: ManagerColors.white),
                 ),
                 const Spacer(),
                 Text(
                   "${HijriCalendar.now().longMonthName} | ${HijriCalendar.now().hDay}, ${HijriCalendar.now().hYear} AH ",
                   style: getRegularTextStyle(
-                      fontSize: ManagerFontSize.s13,
+                      fontSize: ManagerFontSize.s12,
                       color: ManagerColors.white),
                 ),
                 SvgPicture.asset(
                   ManagerAssets.calender2,
-                  width: ManagerWidth.w20,
+                  width: ManagerWidth.w18,
                 ),
               ],
             ),

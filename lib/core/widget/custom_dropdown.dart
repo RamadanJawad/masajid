@@ -19,7 +19,7 @@ class CustomDropdownWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDropdown(
       fillColor: Colors.white,
-      borderSide: const BorderSide(color: Colors.grey),
+      borderSide: BorderSide(color: Colors.grey.shade300),
       hintText: hintText,
       listItemStyle: getRegularTextStyle(
           fontSize: ManagerFontSize.s16, color: Colors.black),
@@ -29,7 +29,7 @@ class CustomDropdownWidget extends StatelessWidget {
       hintStyle: getRegularTextStyle(
           fontSize: ManagerFontSize.s16, color: Colors.grey),
       controller: controller,
-      borderRadius: BorderRadius.circular(ManagerRadius.r10),
+      borderRadius: BorderRadius.circular(ManagerRadius.r4),
       onChanged: (select) {
         // controller.onChangeLanguage(select);
       },
