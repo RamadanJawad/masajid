@@ -27,7 +27,7 @@ class BodyDonate extends StatelessWidget {
         children: [
           WidgetStack(
             name: ManagerStrings.donate,
-            visible: false,
+            visible: true,
           ),
           GetBuilder<DonateController>(
               init: DonateController(),

@@ -33,7 +33,7 @@ class ContactUsScreen extends StatelessWidget {
                   height: ManagerHeight.h26,
                 ),
               WidgetStack(
-                visible: false,
+                visible: true,
                 name: ManagerStrings.contactUs,
               ),
               Container(

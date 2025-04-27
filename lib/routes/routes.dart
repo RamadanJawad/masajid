@@ -65,7 +65,8 @@ class RouteGenerator {
       case Routes.gallery:
         return MaterialPageRoute(builder: (_) => const GalleryScreen());
       case Routes.singleAnnouncements:
-        return MaterialPageRoute(builder: (_) => const SingleAnnouncementsScreen());
+        return MaterialPageRoute(
+            builder: (_) => const SingleAnnouncementsScreen());
       case Routes.contact:
         return MaterialPageRoute(builder: (_) => const ContactScreen());
       default:
@@ -75,14 +76,7 @@ class RouteGenerator {
 
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
-      builder: (_) => Scaffold(
-        appBar: AppBar(
-          title: const Text("no Route Found"),
-        ),
-        body: const Center(
-          child: Text("no Route Found"),
-        ),
-      ),
+      builder: (_) => const MainScreen(),
     );
   }
 }
