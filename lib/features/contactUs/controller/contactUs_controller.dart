@@ -15,7 +15,7 @@ class ContactUsController extends GetxController {
   late TextEditingController name;
   String number = '';
   late TextEditingController message;
-  var formKey = GlobalKey<FormState>();
+  
   List<Reasons?>? reasons;
   bool isLoading = false;
   List<String> item = ["Loading..."];
@@ -32,10 +32,27 @@ class ContactUsController extends GetxController {
   ];
 
   List socialMedia = [
-    {"title":ManagerStrings.facebook,"url": "https://www.facebook.com/people/Burlington-Masjid/100064627872219/", "icon": ManagerAssets.facebook},
-    {"title":ManagerStrings.instagram,"url": "https://www.instagram.com/burlingtonmasjidyouth/", "icon": ManagerAssets.instagram},
-    {"title":ManagerStrings.whatsApp,"url": "https://chat.whatsapp.com/HuOY7bTMp5cABNNIk4PURC", "icon": ManagerAssets.whatsUp},
-    {"title":ManagerStrings.youTube,"url": "https://www.youtube.com/channel/UCuC9cpLXR9VQiYJVpJg_RiA", "icon": ManagerAssets.youtube}
+    {
+      "title": ManagerStrings.facebook,
+      "url":
+          "https://www.facebook.com/people/Burlington-Masjid/100064627872219/",
+      "icon": ManagerAssets.facebook
+    },
+    {
+      "title": ManagerStrings.instagram,
+      "url": "https://www.instagram.com/burlingtonmasjidyouth/",
+      "icon": ManagerAssets.instagram
+    },
+    {
+      "title": ManagerStrings.whatsApp,
+      "url": "https://chat.whatsapp.com/HuOY7bTMp5cABNNIk4PURC",
+      "icon": ManagerAssets.whatsUp
+    },
+    {
+      "title": ManagerStrings.youTube,
+      "url": "https://www.youtube.com/channel/UCuC9cpLXR9VQiYJVpJg_RiA",
+      "icon": ManagerAssets.youtube
+    }
   ];
   Future<void> openLink(String url) async {
     final Uri uri = Uri.parse(url.startsWith('http') ? url : 'https://$url');
@@ -63,21 +80,21 @@ class ContactUsController extends GetxController {
   Future<void> sendToContact() async {
     try {
       bool status = await ApiRequestController().sendToContact(
-        deviceId: SharedPrefController().getDeviceId!,
+          deviceId: SharedPrefController().getDeviceId!,
           name: name.text,
           email: email.text,
           phone: number,
           reason: reason.text,
           message: message.text);
-      if(status){
+      if (status) {
         Get.snackbar(
           "Success",
           "The message was sent successfully.",
-          margin:const EdgeInsets.only(bottom: 5,left: 5,right: 5),
+          margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.green.withOpacity(0.8),
           colorText: Colors.white,
-          duration:const Duration(seconds: 4),
+          duration: const Duration(seconds: 4),
         );
       }
     } catch (e) {

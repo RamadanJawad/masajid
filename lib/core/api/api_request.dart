@@ -67,6 +67,18 @@ class ApiRequestController {
     });
   }
 
+  Future<IqamaSetting?> getIqamaSetting() async {
+    return handleRequest(() async {
+      final url = Uri.parse(ApiSetting.iqamaSetting);
+      final response = await http.get(url).timeout(const Duration(seconds: 10));
+      var jsonData = handleResponse(response)["data"];
+      if (jsonData == null) {
+        return null; // Handle the case where the API returns null
+      }
+      return IqamaSetting.fromJson(jsonData);
+    });
+  }
+
   Future<Device?> sendDeviceId({required String deviceId}) async {
     return handleRequest(() async {
       final url = Uri.parse(ApiSetting.deviceId);
@@ -136,14 +148,6 @@ class ApiRequestController {
     });
   }
 
-  Future<List<PrayerTime?>> getPrayTimes() async {
-    return handleRequest(() async {
-      final url = Uri.parse(ApiSetting.prayTimes);
-      final response = await http.get(url).timeout(const Duration(seconds: 10));
-      var jsonData = handleResponse(response)["data"] as List;
-      return jsonData.map((e)=>PrayerTime.fromJson(e)).toList();
-    });
-  }
 
   Future<List<Reasons?>> getReason() async {
     return handleRequest(() async {

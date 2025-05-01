@@ -7,6 +7,7 @@ import 'package:masajid/core/cache/cache.dart';
 import 'package:masajid/core/storage/shared_controller.dart';
 import 'package:masajid/features/home/model/features.dart';
 import 'package:masajid/features/home/model/masjid_details.dart';
+import 'package:masajid/features/home/model/prayerTime.dart';
 
 class HomeController extends GetxController {
   String? currentPrayName;
@@ -16,9 +17,11 @@ class HomeController extends GetxController {
   CalculationParameters? parameter;
   List prayTimeData = [];
   bool isLoading = true;
+  String? jomaTime;
   String? currentPrayTime;
   bool isLoadingMenu = false;
   List<Features?>? features;
+  IqamaSetting? iqamaSetting;
   DateTime dateTime = DateTime.now();
   MasjidDetails? masjidDetails;
   String? selectedNotificationPrayer;
@@ -33,6 +36,29 @@ class HomeController extends GetxController {
         CacheData().setStatusAnnouncement(false);
       }
     }
+    update();
+  }
+
+  Future<void> readIqamaAndJoma() async {
+    isLoading = true;
+    update();
+    String? localJoma = SharedPrefController().getJomaTime;
+    if (localJoma != null) {
+      jomaTime = localJoma;
+    }
+    try {
+      iqamaSetting = await ApiRequestController().getIqamaSetting();
+      if (iqamaSetting?.jumaa?.begins != null) {
+        jomaTime = iqamaSetting!.jumaa!.begins;
+        SharedPrefController().saveJoma(timeJoma: jomaTime!);
+      }
+      SharedPrefController().saveIqama(iqamaSetting: iqamaSetting!);
+    } catch (e) {
+      if (localJoma == null) {
+        jomaTime = null;
+      }
+    }
+    isLoading = false;
     update();
   }
 
@@ -56,7 +82,6 @@ class HomeController extends GetxController {
         return;
       }
     }
-
     parameter = CalculationMethod.moon_sighting_committee.getParameters();
     parameter!.madhab = Madhab.shafi;
     prayerTimes = PrayerTimes.today(coordinates!, parameter!);
@@ -65,48 +90,53 @@ class HomeController extends GetxController {
         "name": "Fajr         ",
         "time": prayerTimes!.fajr,
         "salahBegin": DateFormat.jm().format(prayerTimes!.fajr),
-        "salahIqaamah": DateFormat.jm()
-            .format(prayerTimes!.fajr.add(const Duration(minutes: 20)))
+        "salahIqaamah":
+            DateFormat.jm().format(prayerTimes!.fajr.add(Duration(minutes: 20)))
       },
       {
         "name": "Dhuhr    ",
         "time": prayerTimes!.dhuhr,
         "salahBegin": DateFormat.jm().format(prayerTimes!.dhuhr),
         "salahIqaamah": DateFormat.jm()
-            .format(prayerTimes!.dhuhr.add(const Duration(minutes: 10)))
+            .format(prayerTimes!.dhuhr.add(Duration(minutes: 10)))
       },
       {
         "name": "Asr           ",
         "time": prayerTimes!.asr,
         "salahBegin": DateFormat.jm().format(prayerTimes!.asr),
-        "salahIqaamah": DateFormat.jm()
-            .format(prayerTimes!.asr.add(const Duration(minutes: 10)))
+        "salahIqaamah":
+            DateFormat.jm().format(prayerTimes!.asr.add(Duration(minutes: 10)))
       },
       {
         "name": "Maghrib",
         "time": prayerTimes!.maghrib,
         "salahBegin": DateFormat.jm().format(prayerTimes!.maghrib),
         "salahIqaamah": DateFormat.jm()
-            .format(prayerTimes!.maghrib.add(const Duration(minutes: 10)))
+            .format(prayerTimes!.maghrib.add(Duration(minutes: 10)))
       },
       {
         "name": "Isha          ",
         "time": prayerTimes!.isha,
         "salahBegin": DateFormat.jm().format(prayerTimes!.isha),
-        "salahIqaamah": DateFormat.jm()
-            .format(prayerTimes!.isha.add(const Duration(minutes: 10)))
+        "salahIqaamah":
+            DateFormat.jm().format(prayerTimes!.isha.add(Duration(minutes: 15)))
       },
-      // {
-      //   "name": "Friday Prayers                                 ",
-      //   "time": prayerTimes!.dhuhr,
-      //   "salahBegin": DateFormat.jm().format(prayerTimes!.dhuhr),
-      //   "salahIqaamah": ""
-      // },
     ];
 
     determineCurrentPrayer();
     isLoading = false;
     update();
+  }
+
+  String formatJomaTime(String time24) {
+    try {
+      final inputFormat = DateFormat("HH:mm:ss");
+      final dateTime = inputFormat.parse(time24);
+      final outputFormat = DateFormat("h:mm a"); // 12-hour format with AM/PM
+      return outputFormat.format(dateTime);
+    } catch (e) {
+      return time24; // fallback if parsing fails
+    }
   }
 
   void determineCurrentPrayer() {
@@ -133,6 +163,7 @@ class HomeController extends GetxController {
     super.onInit();
     readFeatures();
     initPryTime();
+    readIqamaAndJoma();
     Timer.periodic(const Duration(minutes: 1), (timer) {
       determineCurrentPrayer();
     });

@@ -57,7 +57,10 @@ class RouteGenerator {
       case Routes.tasbih:
         return MaterialPageRoute(builder: (_) => const TasbihScreen());
       case Routes.contactUs:
-        return MaterialPageRoute(builder: (_) => const ContactUsScreen());
+        return MaterialPageRoute(
+            builder: (_) => const ContactUsScreen(
+                  status: true,
+                ));
       case Routes.donate:
         return MaterialPageRoute(builder: (_) => const DonateScreen());
       case Routes.aboutUs:

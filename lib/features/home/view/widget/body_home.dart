@@ -12,6 +12,7 @@ import 'package:masajid/features/home/view/widget/custom_praytime.dart';
 import 'package:masajid/features/home/view/widget/friday_widget.dart';
 import 'package:masajid/features/home/view/widget/shimmer_widget.dart';
 import 'package:masajid/features/home/view/widget/sunrise_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 class BodyHome extends StatelessWidget {
   const BodyHome({super.key});
@@ -143,10 +144,24 @@ class BodyHome extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: ManagerHeight.h20),
-                                  FridayWidget(
-                                    fridayPrayersTime: controller
-                                        .prayTimeData[1]['salahBegin'],
-                                  ),
+                                  controller.isLoading ||
+                                          controller.jomaTime == null
+                                      ? Shimmer.fromColors(
+                                          baseColor: Colors.grey[300]!,
+                                          highlightColor: Colors.white,
+                                          child: Container(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: ManagerHeight.h4),
+                                            height: ManagerHeight.h50,
+                                            width: double.infinity,
+                                            color: Colors.grey[300],
+                                          ),
+                                        )
+                                      : FridayWidget(
+                                          fridayPrayersTime:
+                                              controller.formatJomaTime(
+                                                  controller.jomaTime!),
+                                        ),
                                   SizedBox(height: ManagerHeight.h20),
                                 ],
                               ),

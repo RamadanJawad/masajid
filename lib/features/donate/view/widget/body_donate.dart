@@ -1,6 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import 'package:masajid/core/resources/manager_assets.dart';
 import 'package:masajid/core/resources/manager_colors.dart';
 import 'package:masajid/core/resources/manager_fonts.dart';
@@ -14,7 +16,12 @@ import 'package:masajid/core/widget/widget_stack.dart';
 import 'package:masajid/features/donate/controller/donate_controller.dart';
 
 class BodyDonate extends StatelessWidget {
-  const BodyDonate({super.key});
+  const BodyDonate({
+    Key? key,
+    required this.status,
+  }) : super(key: key);
+
+  final bool status;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,7 @@ class BodyDonate extends StatelessWidget {
         children: [
           WidgetStack(
             name: ManagerStrings.donate,
-            visible: true,
+            visible: status,
           ),
           GetBuilder<DonateController>(
               init: DonateController(),

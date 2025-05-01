@@ -1,7 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+
 import 'package:masajid/core/resources/manager_assets.dart';
 import 'package:masajid/core/resources/manager_colors.dart';
 import 'package:masajid/core/resources/manager_fonts.dart';
@@ -17,10 +19,13 @@ import 'package:masajid/features/contactUs/view/screen/contact.dart';
 import 'package:masajid/features/contactUs/view/widget/custom_text.dart';
 
 class ContactUsScreen extends StatelessWidget {
-  const ContactUsScreen({super.key});
+  const ContactUsScreen({super.key, this.status = true});
+
+  final bool status;
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -30,10 +35,10 @@ class ContactUsScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                  height: ManagerHeight.h26,
-                ),
+                height: ManagerHeight.h26,
+              ),
               WidgetStack(
-                visible: true,
+                visible: status,
                 name: ManagerStrings.contactUs,
               ),
               Container(
@@ -75,7 +80,7 @@ class ContactUsScreen extends StatelessWidget {
                               height: ManagerHeight.h16,
                             ),
                             Form(
-                              key: controller.formKey,
+                              key: formKey,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -187,8 +192,7 @@ class ContactUsScreen extends StatelessWidget {
                                     height: ManagerHeight.h50,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        if (controller.formKey.currentState!
-                                            .validate()) {
+                                        if (formKey.currentState!.validate()) {
                                           controller.sendToContact();
                                         }
                                       },
