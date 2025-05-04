@@ -90,39 +90,38 @@ class HomeController extends GetxController {
         "name": "Fajr         ",
         "time": prayerTimes!.fajr,
         "salahBegin": DateFormat.jm().format(prayerTimes!.fajr),
-        "salahIqaamah":
-            DateFormat.jm().format(prayerTimes!.fajr.add(Duration(minutes: 20)))
+        "salahIqaamah": DateFormat.jm()
+            .format(prayerTimes!.fajr.add(const Duration(minutes: 20)))
       },
       {
         "name": "Dhuhr    ",
         "time": prayerTimes!.dhuhr,
         "salahBegin": DateFormat.jm().format(prayerTimes!.dhuhr),
         "salahIqaamah": DateFormat.jm()
-            .format(prayerTimes!.dhuhr.add(Duration(minutes: 10)))
+            .format(prayerTimes!.dhuhr.add(const Duration(minutes: 10)))
       },
       {
         "name": "Asr           ",
         "time": prayerTimes!.asr,
         "salahBegin": DateFormat.jm().format(prayerTimes!.asr),
-        "salahIqaamah":
-            DateFormat.jm().format(prayerTimes!.asr.add(Duration(minutes: 10)))
+        "salahIqaamah": DateFormat.jm()
+            .format(prayerTimes!.asr.add(const Duration(minutes: 10)))
       },
       {
         "name": "Maghrib",
         "time": prayerTimes!.maghrib,
         "salahBegin": DateFormat.jm().format(prayerTimes!.maghrib),
         "salahIqaamah": DateFormat.jm()
-            .format(prayerTimes!.maghrib.add(Duration(minutes: 10)))
+            .format(prayerTimes!.maghrib.add(const Duration(minutes: 10)))
       },
       {
         "name": "Isha          ",
         "time": prayerTimes!.isha,
         "salahBegin": DateFormat.jm().format(prayerTimes!.isha),
-        "salahIqaamah":
-            DateFormat.jm().format(prayerTimes!.isha.add(Duration(minutes: 15)))
+        "salahIqaamah": DateFormat.jm()
+            .format(prayerTimes!.isha.add(const Duration(minutes: 15)))
       },
     ];
-
     determineCurrentPrayer();
     isLoading = false;
     update();
@@ -141,14 +140,30 @@ class HomeController extends GetxController {
 
   void determineCurrentPrayer() {
     DateTime now = DateTime.now();
+    DateTime? lastPrayerTime;
+    String? lastPrayerName;
+    String? lastPrayerBegin;
+
     for (var prayer in prayTimeData) {
       DateTime prayerTime = prayer["time"];
       if (now.isAfter(prayerTime)) {
-        currentPrayName = prayer["name"];
-        currentPrayTime = prayer["salahBegin"];
-        dateTime = prayer["time"];
+        lastPrayerTime = prayerTime;
+        lastPrayerName = prayer["name"];
+        lastPrayerBegin = prayer["salahBegin"];
       }
     }
+
+    if (lastPrayerTime != null) {
+      currentPrayName = lastPrayerName;
+      currentPrayTime = lastPrayerBegin;
+      dateTime = lastPrayerTime;
+    } else {
+      // إذا لم يبدأ أي وقت صلاة بعد (مثلاً قبل الفجر)
+      currentPrayName = prayTimeData.first["name"];
+      currentPrayTime = prayTimeData.first["salahBegin"];
+      dateTime = prayTimeData.first["time"];
+    }
+
     update();
   }
 

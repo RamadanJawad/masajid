@@ -34,7 +34,7 @@ class ManagerAssets {
   static const String azkar = "$svgPath/azkar.svg";
   static const String gallary = "$svgPath/gallary.svg";
   static const String qibla = "$svgPath/qibla.svg";
-  static const String qibla2 = "$imagesPath/qibla.png";
+  static const String qibla2 = "$imagesPath/qibla2.png";
   static const String quran = "$svgPath/quran.svg";
   static const String hadith = "$svgPath/hadith.svg";
   static const String tasbih = "$svgPath/tasbih.svg";

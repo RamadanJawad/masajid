@@ -71,7 +71,7 @@ class WidgetStack extends StatelessWidget {
                         color: ManagerColors.white),
                   ),
                   Text(
-                    controller.currentPrayName!,
+                    controller.currentPrayName ?? "",
                     style: getBoldTextStyle(
                         fontSize: ManagerFontSize.s22,
                         color: ManagerColors.white),
@@ -82,7 +82,7 @@ class WidgetStack extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  controller.currentPrayTime!,
+                  controller.currentPrayTime ?? "",
                   style: getBoldTextStyle(
                       fontSize: ManagerFontSize.s22,
                       color: ManagerColors.white),
