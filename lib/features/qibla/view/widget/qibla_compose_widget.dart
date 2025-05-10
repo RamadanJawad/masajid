@@ -23,10 +23,14 @@ class QiblahCompassWidget extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CupertinoActivityIndicator());
           }
+
+          if (!snapshot.hasData || snapshot.data == null) {
+            return const Center(child: Text("Unable to get Qibla direction."));
+          }
           final qiblahDirection = snapshot.data!;
           controller.animation = Tween(
-              begin: controller.begin,
-              end: (qiblahDirection.qiblah * (pi / 180) * -1))
+                  begin: controller.begin,
+                  end: (qiblahDirection.qiblah * (pi / 180) * -1))
               .animate(controller.animationController!);
           controller.begin = (qiblahDirection.qiblah * (pi / 180) * -1);
           controller.animationController!.forward(from: 0);
@@ -85,12 +89,18 @@ class QiblahCompassWidget extends StatelessWidget {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: "${controller.placemarks![0].locality!} ,",
+                      text: controller.placemarks == null ||
+                              controller.placemarks!.isEmpty
+                          ? "Location not available."
+                          : "${controller.placemarks![0].locality!} ,",
                       style: getBoldTextStyle(
                           fontSize: ManagerFontSize.s12,
                           color: ManagerColors.textColor)),
                   TextSpan(
-                      text: controller.placemarks![0].country!,
+                      text: controller.placemarks == null ||
+                              controller.placemarks!.isEmpty
+                          ? "Location not available."
+                          : controller.placemarks![0].country!,
                       style: getBoldTextStyle(
                           fontSize: ManagerFontSize.s12,
                           color: ManagerColors.textColor))

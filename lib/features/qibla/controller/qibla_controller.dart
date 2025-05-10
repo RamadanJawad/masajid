@@ -17,29 +17,39 @@ class QiblaController extends GetxController
   get stream => _locationStreamController.stream;
 
   Future<void> checkLocationStatus() async {
-    Position position = await Geolocator.getCurrentPosition();
-    placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-    setLocaleIdentifier("en_US").then((_) {
-      print('Placemarks: $placemarks');
-      update();
-    });
+  try {
     final locationStatus = await FlutterQiblah.checkLocationStatus();
-    if (locationStatus.enabled &&
+
+    if (!locationStatus.enabled ||
         locationStatus.status == LocationPermission.denied) {
       await FlutterQiblah.requestPermissions();
-      final s = await FlutterQiblah.checkLocationStatus();
-      _locationStreamController.sink.add(s);
-      update();
-    } else {
-      _locationStreamController.sink.add(locationStatus);
     }
+
+    final updatedStatus = await FlutterQiblah.checkLocationStatus();
+    _locationStreamController.sink.add(updatedStatus);
+
+    if (updatedStatus.enabled &&
+        updatedStatus.status == LocationPermission.always ||
+        updatedStatus.status == LocationPermission.whileInUse) {
+      Position position = await Geolocator.getCurrentPosition();
+      placemarks = await placemarkFromCoordinates(
+          position.latitude, position.longitude);
+      await setLocaleIdentifier("en_US");
+    }
+
+    update();
+  } catch (e) {
+    debugPrint("Location permission error: $e");
+    _locationStreamController.sink.add(
+      LocationStatus(false,LocationPermission.denied),
+    );
   }
+}
+
 
   @override
   void onInit() {
     super.onInit();
-    // checkLocationStatus();
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 700));
     animation = Tween(begin: 0.0, end: 0.0).animate(animationController!);
