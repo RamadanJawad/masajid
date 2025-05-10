@@ -8,17 +8,6 @@ class IqamaSetting {
     iqama = json['iqama'] != null ? new Iqama.fromJson(json['iqama']) : null;
     jumaa = json['jumaa'] != null ? new Jumaa.fromJson(json['jumaa']) : null;
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.iqama != null) {
-      data['iqama'] = this.iqama!.toJson();
-    }
-    if (this.jumaa != null) {
-      data['jumaa'] = this.jumaa!.toJson();
-    }
-    return data;
-  }
 }
 
 class Iqama {
@@ -54,27 +43,12 @@ class Iqama {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['masjid_id'] = this.masjidId;
-    data['fajr'] = this.fajr;
-    data['dhuhr'] = this.dhuhr;
-    data['asr'] = this.asr;
-    data['maghrib'] = this.maghrib;
-    data['isha'] = this.isha;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
-  }
 }
 
 class Jumaa {
   int? id;
   int? masjidId;
-  String? begins;
-  String? primaryAthan;
+  List<String>? athans;
   String? iqama;
   String? createdAt;
   String? updatedAt;
@@ -82,8 +56,7 @@ class Jumaa {
   Jumaa(
       {this.id,
       this.masjidId,
-      this.begins,
-      this.primaryAthan,
+      this.athans,
       this.iqama,
       this.createdAt,
       this.updatedAt});
@@ -91,22 +64,9 @@ class Jumaa {
   Jumaa.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     masjidId = json['masjid_id'];
-    begins = json['begins'];
-    primaryAthan = json['primary_athan'];
+    athans = json['athans'].cast<String>();
     iqama = json['iqama'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['masjid_id'] = this.masjidId;
-    data['begins'] = this.begins;
-    data['primary_athan'] = this.primaryAthan;
-    data['iqama'] = this.iqama;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
   }
 }

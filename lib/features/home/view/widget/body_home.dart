@@ -145,7 +145,9 @@ class BodyHome extends StatelessWidget {
                                   ),
                                   SizedBox(height: ManagerHeight.h20),
                                   controller.isLoading ||
-                                          controller.jomaTime == null
+                                          controller.iqamaSetting?.jumaa
+                                                  ?.athans ==
+                                              null
                                       ? Shimmer.fromColors(
                                           baseColor: Colors.grey[300]!,
                                           highlightColor: Colors.white,
@@ -157,12 +159,33 @@ class BodyHome extends StatelessWidget {
                                             color: Colors.grey[300],
                                           ),
                                         )
-                                      : FridayWidget(
-                                          fridayPrayersTime:
-                                              controller.formatJomaTime(
-                                                  controller.jomaTime!),
+                                      : Column(
+                                          children: controller.iqamaSetting!
+                                                  .jumaa!.athans!.isEmpty
+                                              ? [
+                                                  FridayWidget(
+                                                    fridayPrayersTime:
+                                                        controller
+                                                            .formatJomaTime(
+                                                                controller
+                                                                    .jomaTime!),
+                                                  ),
+                                                ]
+                                              : controller
+                                                  .iqamaSetting!.jumaa!.athans!
+                                                  .map((time) {
+                                                  return Container(
+                                                    margin:EdgeInsets.only(bottom:ManagerHeight.h10),
+                                                    child: FridayWidget(
+                                                      fridayPrayersTime:
+                                                          controller
+                                                              .formatJomaTime(
+                                                                  time),
+                                                    ),
+                                                  );
+                                                }).toList(),
                                         ),
-                                  SizedBox(height: ManagerHeight.h20),
+                                  SizedBox(height: ManagerHeight.h10),
                                 ],
                               ),
                       ))

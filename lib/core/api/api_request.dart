@@ -18,7 +18,6 @@ import '../../features/announcements/model/announcements.dart';
 import 'handle_api.dart';
 
 class ApiRequestController {
-
   Future<Hadith?> getHadith() async {
     return handleRequest(() async {
       final url = Uri.parse(ApiSetting.hadith);
@@ -73,7 +72,7 @@ class ApiRequestController {
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"];
       if (jsonData == null) {
-        return null; // Handle the case where the API returns null
+        return null;
       }
       return IqamaSetting.fromJson(jsonData);
     });
@@ -82,9 +81,9 @@ class ApiRequestController {
   Future<Device?> sendDeviceId({required String deviceId}) async {
     return handleRequest(() async {
       final url = Uri.parse(ApiSetting.deviceId);
-      final response = await http.post(url,body: {
-        "device_id":deviceId,
-        "masjid_id":ApiSetting.idMasjid
+      final response = await http.post(url, body: {
+        "device_id": deviceId,
+        "masjid_id": ApiSetting.idMasjid
       }).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"];
       if (jsonData == null) {
@@ -99,7 +98,7 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.tasabih);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"] as List;
-      return jsonData.map((e)=>Tasbih.fromJson(e)).toList();
+      return jsonData.map((e) => Tasbih.fromJson(e)).toList();
     });
   }
 
@@ -108,7 +107,7 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.features);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"] as List;
-      return jsonData.map((e)=>Features.fromJson(e)).toList();
+      return jsonData.map((e) => Features.fromJson(e)).toList();
     });
   }
 
@@ -117,7 +116,7 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.announcements);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"] as List;
-      return jsonData.map((e)=>Announcements.fromJson(e)).toList();
+      return jsonData.map((e) => Announcements.fromJson(e)).toList();
     });
   }
 
@@ -126,7 +125,7 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.events);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"] as List;
-      return jsonData.map((e)=>Events.fromJson(e)).toList();
+      return jsonData.map((e) => Events.fromJson(e)).toList();
     });
   }
 
@@ -135,7 +134,7 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.azkar);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"] as List;
-      return jsonData.map((e)=>Azkar.fromJson(e)).toList();
+      return jsonData.map((e) => Azkar.fromJson(e)).toList();
     });
   }
 
@@ -144,17 +143,16 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.services);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"] as List;
-      return jsonData.map((e)=>Services.fromJson(e)).toList();
+      return jsonData.map((e) => Services.fromJson(e)).toList();
     });
   }
-
 
   Future<List<Reasons?>> getReason() async {
     return handleRequest(() async {
       final url = Uri.parse(ApiSetting.reason);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"] as List;
-      return jsonData.map((e)=>Reasons.fromJson(e)).toList();
+      return jsonData.map((e) => Reasons.fromJson(e)).toList();
     });
   }
 
@@ -163,7 +161,7 @@ class ApiRequestController {
       final url = Uri.parse(ApiSetting.gallery);
       final response = await http.get(url).timeout(const Duration(seconds: 10));
       var jsonData = handleResponse(response)["data"] as List;
-      return jsonData.map((e)=>Gallery.fromJson(e)).toList();
+      return jsonData.map((e) => Gallery.fromJson(e)).toList();
     });
   }
 
@@ -173,11 +171,11 @@ class ApiRequestController {
       required String phone,
       required String reason,
       required String message,
-        required String deviceId}) async {
+      required String deviceId}) async {
     return handleRequest(() async {
       final url = Uri.parse(ApiSetting.contactUs);
-      final response = await http.post(url,body: {
-        "device_id":deviceId,
+      final response = await http.post(url, body: {
+        "device_id": deviceId,
         "name": name,
         "email": email,
         "phone": phone,

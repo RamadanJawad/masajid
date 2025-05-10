@@ -4,19 +4,24 @@ import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:masajid/core/storage/shared_controller.dart';
 
-class QiblaController extends GetxController with GetSingleTickerProviderStateMixin{
+class QiblaController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   Animation<double>? animation;
   AnimationController? animationController;
   double begin = 0.0;
   List<Placemark>? placemarks;
   final _locationStreamController =
-  StreamController<LocationStatus>.broadcast();
+      StreamController<LocationStatus>.broadcast();
   get stream => _locationStreamController.stream;
 
   Future<void> checkLocationStatus() async {
-    placemarks=await placemarkFromCoordinates(35.78056000, -78.63890000);
-    setLocaleIdentifier("en_US").then((_){
+    Position position = await Geolocator.getCurrentPosition();
+    placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    setLocaleIdentifier("en_US").then((_) {
+      print('Placemarks: $placemarks');
       update();
     });
     final locationStatus = await FlutterQiblah.checkLocationStatus();
@@ -30,6 +35,7 @@ class QiblaController extends GetxController with GetSingleTickerProviderStateMi
       _locationStreamController.sink.add(locationStatus);
     }
   }
+
   @override
   void onInit() {
     super.onInit();

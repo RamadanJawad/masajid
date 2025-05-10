@@ -42,20 +42,25 @@ class HomeController extends GetxController {
   Future<void> readIqamaAndJoma() async {
     isLoading = true;
     update();
-    String? localJoma = SharedPrefController().getJomaTime;
-    if (localJoma != null) {
-      jomaTime = localJoma;
+    List<String>? localJomaTimes = SharedPrefController().getJomaTimes;
+    if (localJomaTimes != null && localJomaTimes.isNotEmpty) {
+      jomaTime = localJomaTimes.first;
     }
     try {
       iqamaSetting = await ApiRequestController().getIqamaSetting();
-      if (iqamaSetting?.jumaa?.begins != null) {
-        jomaTime = iqamaSetting!.jumaa!.begins;
-        SharedPrefController().saveJoma(timeJoma: jomaTime!);
+      if (iqamaSetting?.jumaa?.iqama != null &&
+          iqamaSetting!.jumaa!.athans!.isNotEmpty) {
+        // نحفظ أول وقت كافتراضي (اختياري)
+        jomaTime = iqamaSetting!.jumaa!.athans!.first;
+        await SharedPrefController()
+            .saveJomaTimes(times: iqamaSetting!.jumaa!.athans!);
       }
       SharedPrefController().saveIqama(iqamaSetting: iqamaSetting!);
     } catch (e) {
-      if (localJoma == null) {
+      if (localJomaTimes == null || localJomaTimes.isEmpty) {
         jomaTime = null;
+      } else {
+        jomaTime = localJomaTimes.first;
       }
     }
     isLoading = false;

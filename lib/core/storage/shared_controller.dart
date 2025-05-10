@@ -17,8 +17,8 @@ class SharedPrefController {
     await _sharedPreferences.setString("device_id", deviceId);
   }
 
-  Future saveJoma({required String timeJoma}) async {
-    await _sharedPreferences.setString("time_joma", timeJoma);
+  Future<void> saveJomaTimes({required List<String> times}) async {
+    await _sharedPreferences.setStringList("joma_times", times);
   }
 
   Future saveIqama({required IqamaSetting iqamaSetting}) async {
@@ -38,15 +38,19 @@ class SharedPrefController {
   int? get getTimeFajr {
     return _sharedPreferences.getInt("time_fajr");
   }
+
   int? get getTimeDhuhr {
     return _sharedPreferences.getInt("time_dhuhr");
   }
+
   int? get getTimeAsr {
     return _sharedPreferences.getInt("time_asr");
   }
+
   int? get getTimeMagrib {
     return _sharedPreferences.getInt("time_maghrib");
   }
+
   int? get getTimeIsha {
     return _sharedPreferences.getInt("time_isha");
   }
@@ -55,8 +59,8 @@ class SharedPrefController {
     return _sharedPreferences.getString("device_id");
   }
 
-  String? get getJomaTime {
-    return _sharedPreferences.getString("time_joma");
+  List<String>? get getJomaTimes {
+    return _sharedPreferences.getStringList("joma_times");
   }
 
   String? get getLat {
