@@ -40,7 +40,16 @@ class QiblahCompassWidget extends StatelessWidget {
                 height: ManagerHeight.h30,
               ),
               Text(
-                "Qibla angle:${snapshot.data!.qiblah.toStringAsFixed(2)}",
+                "Compass angle:${snapshot.data!.direction.toStringAsFixed(2)}",
+                style: getBoldTextStyle(
+                    fontSize: ManagerFontSize.s14,
+                    color: ManagerColors.textColor),
+              ),
+              SizedBox(
+                height: ManagerHeight.h10,
+              ),
+              Text(
+                "Qibla angle:${controller.fixedQiblaAngle?.toStringAsFixed(1) ?? "..."}",
                 style: getBoldTextStyle(
                     fontSize: ManagerFontSize.s14,
                     color: ManagerColors.textColor),

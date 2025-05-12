@@ -79,18 +79,18 @@ class ApiRequestController {
   }
 
   Future<Device?> sendDeviceId({required String deviceId}) async {
-    return handleRequest(() async {
-      final url = Uri.parse(ApiSetting.deviceId);
-      final response = await http.post(url, body: {
-        "device_id": deviceId,
-        "masjid_id": ApiSetting.idMasjid
-      }).timeout(const Duration(seconds: 10));
-      var jsonData = handleResponse(response)["data"];
-      if (jsonData == null) {
-        return null; // Handle the case where the API returns null
-      }
-      return Device.fromJson(jsonData);
-    });
+    // return handleRequest(() async {
+    final url = Uri.parse(ApiSetting.deviceId);
+    final response = await http.post(url, body: {
+      "device_id": deviceId,
+      "masjid_id": ApiSetting.idMasjid
+    }).timeout(const Duration(seconds: 10));
+    var jsonData = handleResponse(response)["data"];
+    if (jsonData == null) {
+      return null; // Handle the case where the API returns null
+    }
+    return Device.fromJson(jsonData);
+    // });
   }
 
   Future<List<Tasbih?>> getTasbih() async {
