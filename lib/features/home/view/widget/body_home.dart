@@ -137,7 +137,6 @@ class BodyHome extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: ManagerHeight.h20),
-
                                 // ===== قسم الجمعة المعدل =====
                                 controller.isLoading ||
                                         controller
@@ -166,8 +165,6 @@ class BodyHome extends StatelessWidget {
                                               color: ManagerColors.borderColor),
                                         ),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
                                           children: [
                                             const FridayWidget(),
                                             SizedBox(height: ManagerHeight.h10),
@@ -184,8 +181,6 @@ class BodyHome extends StatelessWidget {
                                                         ManagerRadius.r10),
                                               ),
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
                                                 children: List.generate(
                                                     controller
                                                         .iqamaSetting!
@@ -201,9 +196,12 @@ class BodyHome extends StatelessWidget {
                                                         bottom:
                                                             ManagerHeight.h8),
                                                     child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
                                                         Text(
-                                                          '${index + 1}.',
+                                                          'Shift ${index + 1}',
                                                           style: getBoldTextStyle(
                                                               fontSize:
                                                                   ManagerFontSize
@@ -211,7 +209,6 @@ class BodyHome extends StatelessWidget {
                                                               color:
                                                                   Colors.black),
                                                         ),
-                                                        const Spacer(),
                                                         Text(
                                                           controller
                                                               .formatJomaTime(
@@ -223,7 +220,6 @@ class BodyHome extends StatelessWidget {
                                                               color:
                                                                   Colors.black),
                                                         ),
-                                                        const Spacer(),
                                                       ],
                                                     ),
                                                   );

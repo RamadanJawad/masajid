@@ -1,4 +1,5 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +17,15 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: true,
+      tools: const [
+        ...DevicePreview.defaultTools,
+      ],
+      builder: (context) => const MyApp(),
+    ),
+  );
 }
 
 Future<void> initOneSignal() async {
@@ -30,7 +39,7 @@ Future<void> initOneSignal() async {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
         OneSignal.login(androidInfo.id.toString());
       } else if (Platform.isIOS) {
-        IosDeviceInfo iosInfo=await deviceInfo.iosInfo;
+        IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
         OneSignal.login(iosInfo.identifierForVendor.toString());
       }
     }

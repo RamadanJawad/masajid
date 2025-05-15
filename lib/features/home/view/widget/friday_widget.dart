@@ -26,6 +26,7 @@ class FridayWidget extends StatelessWidget {
         ),
         child: Row(
           children: [
+            const Spacer(),
             SvgPicture.asset(ManagerAssets.aljumaaa),
             SizedBox(width: ManagerWidth.w8),
             Text(
@@ -35,6 +36,7 @@ class FridayWidget extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
+            const Spacer(),
           ],
         ),
       ),
