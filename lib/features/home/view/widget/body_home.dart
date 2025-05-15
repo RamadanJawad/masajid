@@ -170,12 +170,8 @@ class BodyHome extends StatelessWidget {
                                             SizedBox(height: ManagerHeight.h10),
                                             Container(
                                               width: double.infinity,
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: ManagerWidth.w16,
-                                                vertical: ManagerHeight.h10,
-                                              ),
                                               decoration: BoxDecoration(
-                                                color: ManagerColors.iconColor,
+                                                color: ManagerColors.white,
                                                 borderRadius:
                                                     BorderRadius.circular(
                                                         ManagerRadius.r10),
@@ -191,36 +187,60 @@ class BodyHome extends StatelessWidget {
                                                       .iqamaSetting!
                                                       .jumaa!
                                                       .athans![index];
-                                                  return Padding(
-                                                    padding: EdgeInsets.only(
+                                                  return Container(
+                                                    height: ManagerHeight.h54,
+                                                    margin: EdgeInsets.only(
                                                         bottom:
-                                                            ManagerHeight.h8),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          'Shift ${index + 1}',
-                                                          style: getBoldTextStyle(
-                                                              fontSize:
-                                                                  ManagerFontSize
-                                                                      .s16,
-                                                              color:
-                                                                  Colors.black),
-                                                        ),
-                                                        Text(
-                                                          controller
-                                                              .formatJomaTime(
-                                                                  time),
-                                                          style: getBoldTextStyle(
-                                                              fontSize:
-                                                                  ManagerFontSize
-                                                                      .s16,
-                                                              color:
-                                                                  Colors.black),
-                                                        ),
-                                                      ],
+                                                            ManagerHeight.h10),
+                                                    padding: EdgeInsets
+                                                        .symmetric(
+                                                            horizontal:
+                                                                ManagerWidth.w8,
+                                                            vertical:
+                                                                ManagerHeight
+                                                                    .h8),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    ManagerRadius
+                                                                        .r10),
+                                                        border: Border.all(
+                                                            color: ManagerColors
+                                                                .grey
+                                                                .withOpacity(
+                                                                    0.3))),
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          bottom:
+                                                              ManagerHeight.h8),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            'Shift ${index + 1}',
+                                                            style: getBoldTextStyle(
+                                                                fontSize:
+                                                                    ManagerFontSize
+                                                                        .s16,
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                          Text(
+                                                            controller
+                                                                .formatJomaTime(
+                                                                    time),
+                                                            style: getBoldTextStyle(
+                                                                fontSize:
+                                                                    ManagerFontSize
+                                                                        .s16,
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   );
                                                 }),
@@ -229,7 +249,6 @@ class BodyHome extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-
                                 SizedBox(height: ManagerHeight.h10),
                               ],
                             ),
